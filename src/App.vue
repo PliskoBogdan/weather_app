@@ -1,32 +1,40 @@
+<!-- App.vue -->
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <SidebarMenu />
+    <!-- 16 left and right sidebar padding sum -->
+    <div :style="{ 'margin-left': leftMarginForSidebar }">
+      <router-view />
+    </div>
   </div>
 </template>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-nav {
-  padding: 30px;
-}
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
-}
-
-nav a.router-link-exact-active {
-  color: #42b983;
+:root {
+  --sidebar-bg-color: #2f855f;
+  --sidebar-item-hover: #38a169;
+  --sidebar-item-active: #276749;
 }
 </style>
+
+<script>
+import SidebarMenu from './components/SidebarMenu.vue';
+import { mapGetters } from 'vuex';
+export default {
+  components: {
+    SidebarMenu,
+  },
+
+  created() {
+    console.log(this.leftMarginForSidebar);
+  },
+
+  computed: {
+    ...mapGetters(["sidebarWidth"]),
+
+    leftMarginForSidebar() {
+      return `${this.sidebarWidth + 16}px`;
+    }
+  }
+};
+</script>
