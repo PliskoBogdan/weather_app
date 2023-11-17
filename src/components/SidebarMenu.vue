@@ -1,24 +1,38 @@
 <template>
-  <div class="sidebar" :style="{ width: `${sidebarWidth}px` }" @click.self="TOGGLE_SIDEBAR" ref="sidebar">
-    <SidebarLink
-      v-for="{ id, to, icon, name } in linksList"
-      :key="id"
-      :to="to"
-      :icon="icon"
+  <div>
+    <div
+      class="left-drawer"
+      :style="{
+        width: isCollapsed ? '10vw' : '0',
+      }"
     >
-      <div>{{ name }}</div>
-    </SidebarLink>
+      <div style="text-align: right; margin: 5px">
+        <button class="close" @click="isCollapsed = false">&#9587;</button>
+      </div>
+      <SidebarLink
+        v-for="{ id, to, icon, name } in linksList"
+        :key="id"
+        :to="to"
+        :icon="icon"
+      >
+        <div>{{ name }}</div>
+      </SidebarLink>
+    </div>
+    <div
+      class="drawer-mask"
+      :style="{
+        width: isCollapsed ? '100vw' : '0',
+        opacity: isCollapsed ? '0.6' : '0',
+      }"
+      @click="isCollapsed = false"
+    ></div>
   </div>
 </template>
 
 <script>
-import { mapGetters, mapMutations } from "vuex";
-
-import { headerHeight } from "@/vars/index";
+import SidebarLink from "@/components/SidebarLink.vue";
 
 import { EventBus } from "@/main";
-
-import SidebarLink from "@/components/SidebarLink.vue";
 
 export default {
   components: {
@@ -27,60 +41,51 @@ export default {
 
   data() {
     return {
-      headerHeight,
+      isCollapsed: false,
       linksList: [
         { id: 1, icon: "house-user", to: "/", name: "Home" },
         { id: 2, icon: "star", to: "/favorite", name: "Favorite" },
       ],
-      isFirstOpen: true
     };
   },
 
   created() {
-    EventBus.$on('open-sidebar', () => {
-      this.TOGGLE_SIDEBAR(true);
-      // document.addEventListener('click', this.onClose);
-      if (this.isCollapsed) {
-
-        window.addEventListener('click', this.onClose);
-      } else {
-        window.removeEventListener('click', this.onClose);
-      }
-    })
-  },
-
-  computed: {
-    ...mapGetters(["isCollapsed", "sidebarWidth"]),
-  },
-
-  methods: {
-    ...mapMutations(["TOGGLE_SIDEBAR"]),
-
-    onClose(event) {
-      if (!this.$refs.sidebar.contains(event.target) && event.target.tagName !== 'BUTTON') {
-        this.TOGGLE_SIDEBAR(false);
-      }
-    }
+    EventBus.$on("open", () => {
+      this.isCollapsed = true;
+    });
   },
 };
 </script>
 
 <style scoped>
-.sidebar {
-  color: white;
-  background-color: var(--sidebar-bg-color);
+.close {
+  background: var(--sidebar-bg-color);
+  border: 0;
+  cursor: pointer;
+}
 
-  float: left;
-  position: fixed;
-  z-index: 1;
+.left-drawer {
+  position: absolute;
   top: 0;
+  width: 0; /* initially */
+  overflow: hidden;
+  height: 100vh;
+  padding-left: 0; /* initially */
+  border-left: 1px solid whitesmoke;
+  background: var(--sidebar-bg-color);
+  z-index: 200;
+  transition: all 0.2s;
+}
+
+.drawer-mask {
+  position: absolute;
   left: 0;
-  bottom: 0;
-  padding: 0.5rem;
-
-  transition: 0.3s ease;
-
-  display: flex;
-  flex-direction: column;
+  top: 0;
+  width: 0; /* initially */
+  height: 100vh;
+  background: #000;
+  opacity: 0.3;
+  z-index: 199;
+  transition: opacity 0.2s;
 }
 </style>

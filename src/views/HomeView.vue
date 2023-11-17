@@ -1,5 +1,5 @@
 <template>
-  <div>sdsdsdsdsdsdsd sdasd asfd afasf adf af ad
+  <div>It's the home page
   </div>
 </template>
 

@@ -3,10 +3,9 @@
     <div>
       <span
         class="collapse-icon"
-        :class="{ 'rotate-180': isCollapsed }"
         @click="openSidebar"
       >
-        <s-icon name="arrow-right" scale="2" />
+        <s-icon name="bars" scale="2" />
       </span>
     </div>
     <div class="right-block">
@@ -17,7 +16,7 @@
 </template>
 
 <script>
-import { mapMutations, mapGetters } from "vuex";
+import { mapMutations } from "vuex";
 
 import { headerHeight } from "@/vars/index";
 
@@ -30,15 +29,11 @@ export default {
     };
   },
 
-  computed: {
-    ...mapGetters(["isCollapsed"]),
-  },
-
   methods: {
     ...mapMutations(["TOGGLE_SIDEBAR"]),
 
     openSidebar() {
-      EventBus.$emit("open-sidebar", true);
+      EventBus.$emit("open", true);
     },
   },
 };
@@ -59,15 +54,8 @@ header {
 }
 
 .collapse-icon {
-  position: absolute;
-  bottom: 0;
   color: rgba(255, 255, 255, 0.7);
   transition: 0.2s linear;
   cursor: pointer;
-}
-
-.rotate-180 {
-  transform: rotate(180deg);
-  transition: 0.2s linear;
 }
 </style>

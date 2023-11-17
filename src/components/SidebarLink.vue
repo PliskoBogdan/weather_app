@@ -1,5 +1,5 @@
 <template>
-  <router-link :to="to" class="link" :class="{ active: isActive, 'link-collapsed': isCollapsed }">
+  <router-link :to="to" class="link" :class="{ active: isActive }">
     <s-icon :name="icon" />
       <span>
         <slot />
@@ -8,7 +8,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
 export default {
   props: {
     to: { type: String, required: true },
@@ -16,7 +15,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["isCollapsed"]),
     isActive() {
       return this.$route.path === this.to;
     },
@@ -27,13 +25,11 @@ export default {
 <style scoped>
 .link {
   display: flex;
-  align-items: center;
 
   cursor: pointer;
   position: relative;
   font-weight: 400;
   user-select: none;
-
   margin: 0.1em 0;
   padding: 0.4em;
   border-radius: 0.25em;
@@ -41,15 +37,10 @@ export default {
   color: white;
   text-decoration: none;
   display: flex;
-  justify-content: center;
+  align-items: center;
 }
-
-.link-collapsed {
-    justify-content: flex-start;
-}
-
-.link-collapsed span {
-    margin-left: 0.4em;
+.link span {
+  margin-left: 0.25em;
 }
 
 .link:hover {
