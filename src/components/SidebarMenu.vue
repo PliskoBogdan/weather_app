@@ -2,9 +2,8 @@
   <div>
     <div
       class="left-drawer"
-      :style="{
-        width: isCollapsed ? '10vw' : '0',
-      }"
+
+      :class="{'left-drawer-width': isCollapsed}"
     >
       <div style="text-align: right; margin: 5px">
         <button class="close" @click="isCollapsed = false">&#9587;</button>
@@ -86,5 +85,19 @@ export default {
   opacity: 0.3;
   z-index: 199;
   transition: opacity 0.2s;
+}
+.left-drawer-width {
+  width: 10vw;
+}
+@media screen and (max-width: 1000px) {
+  .left-drawer-width {
+    width: 25vw !important;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .left-drawer-width {
+    width: 35vw !important;
+  }
 }
 </style>

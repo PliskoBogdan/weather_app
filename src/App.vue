@@ -11,14 +11,6 @@
 </template>
 
 <style>
-:root {
-  --sidebar-bg-color: #333333;
-  --sidebar-item-hover: #f1f1f1;
-  --sidebar-item-active: #2c3e50;
-  --white: #ffffff;
-  --header-bg: #333333;
-}
-
 body {
   margin: 0;
 }
@@ -26,6 +18,10 @@ body {
 </style>
 
 <script>
+import { mapActions, mapGetters } from 'vuex';
+
+import ColorPallete from '@/services/ColorPallete'
+
 import SidebarMenu from './components/SidebarMenu.vue';
 import Header from './components/Header.vue';
 
@@ -34,5 +30,18 @@ export default {
     SidebarMenu,
     Header
   },
+
+  created() {
+    this.getCurrentAppPallete()
+    ColorPallete.setTheme(this.currentPallete)
+  },
+
+  computed: {
+    ...mapGetters(['currentPallete'])
+  },
+
+  methods: {
+    ...mapActions(['getCurrentAppPallete'])
+  }
 };
 </script>
