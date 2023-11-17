@@ -1,11 +1,9 @@
 <template>
   <router-link :to="to" class="link" :class="{ active: isActive, 'link-collapsed': isCollapsed }">
     <s-icon :name="icon" />
-    <transition name="fade">
-      <span v-if="isCollapsed">
+      <span>
         <slot />
       </span>
-    </transition>
   </router-link>
 </template>
 
@@ -27,15 +25,6 @@ export default {
 </script>
 
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.1s;
-}
-
-.fade-enter,
-.fade-leave-to {
-  opacity: 0;
-}
 .link {
   display: flex;
   align-items: center;

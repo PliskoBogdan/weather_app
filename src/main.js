@@ -11,6 +11,9 @@ import Icon from 'vue-awesome/components/Icon'
 
 Vue.component('s-icon', Icon)
 
+// Event Bus
+export const EventBus = new Vue();
+
 Vue.config.productionTip = false
 
 new Vue({
