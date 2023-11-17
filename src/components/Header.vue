@@ -41,12 +41,13 @@ export default {
 
 <style scoped>
 header {
-  background-color: var(--sidebar-bg-color);
+  background-color: var(--header-bg);
   position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
+  color: var(--white);
 }
 
 .right-block {

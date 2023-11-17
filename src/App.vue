@@ -12,9 +12,11 @@
 
 <style>
 :root {
-  --sidebar-bg-color: #2f855f;
-  --sidebar-item-hover: #38a169;
-  --sidebar-item-active: #276749;
+  --sidebar-bg-color: #333333;
+  --sidebar-item-hover: #f1f1f1;
+  --sidebar-item-active: #2c3e50;
+  --white: #ffffff;
+  --header-bg: #333333;
 }
 
 body {

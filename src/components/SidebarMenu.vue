@@ -71,7 +71,6 @@ export default {
   overflow: hidden;
   height: 100vh;
   padding-left: 0; /* initially */
-  border-left: 1px solid whitesmoke;
   background: var(--sidebar-bg-color);
   z-index: 200;
   transition: all 0.2s;
