@@ -15,7 +15,7 @@ Vue.component('s-icon', Icon)
 // Event Bus
 export const EventBus = new Vue();
 
-
+// Directives
 Vue.directive('preloader', {
   bind(el, binding) {
     const preloader = new Vue({

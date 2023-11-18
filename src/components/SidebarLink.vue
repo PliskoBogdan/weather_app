@@ -34,7 +34,7 @@ export default {
   padding: 0.4em;
   border-radius: 0.25em;
   height: 1.5em;
-  color: var(--white);
+  color: var(--text-main);
   text-decoration: none;
   display: flex;
   align-items: center;

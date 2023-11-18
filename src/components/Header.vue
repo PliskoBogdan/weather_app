@@ -6,12 +6,18 @@
       </span>
     </div>
     <div class="right-block">
+      <CMenu style="margin-right: 1em;">
+        <template #activator>
+          RU
+        </template>
+        <li>RU</li>
+        <li>EN</li>
+      </CMenu>
       <div class="header-color__pallete">
         <s-icon name="sun" scale="1" style="fill: white;"/>
         <CSwitch :value="isDarkPallete" @input="onChangePallete" style="display: flex;" />
         <s-icon name="moon" scale="1" />
       </div>
-      <div>EN</div>
     </div>
   </header>
 </template>
@@ -24,12 +30,14 @@ import { headerHeight } from "@/vars/index";
 import { EventBus } from "@/main";
 
 import CSwitch from "@/components/CSwitch.vue";
+import CMenu from '@/components/CMenu';
 
 import ColorPallete from '@/services/ColorPallete'
 
 export default {
   components: {
     CSwitch,
+    CMenu
   },
 
   data() {
@@ -77,7 +85,7 @@ header {
   justify-content: space-between;
   align-items: center;
   padding: 0 8px;
-  color: var(--white);
+  color: var(--text-main);
 }
 
 .right-block {

@@ -14,6 +14,9 @@
 body {
   margin: 0;
 }
+.pointer {
+  cursor: pointer;
+}
 </style>
 
 <script>
