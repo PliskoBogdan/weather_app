@@ -27,12 +27,17 @@ Vue.directive('preloader', {
   },
   update(el, binding) {
     const preloader = el.querySelector('#preloader');
-    if (preloader) {
-      preloader.loading = binding.value;
+    if (!preloader) {
+      return;
+    }
+
+    if (binding.value) {
+      preloader.__vue__.loading = binding.value;
+    } else {
+      el.removeChild(preloader.__vue__.$el);
     }
   },
 });
-
 
 Vue.config.productionTip = false
 

@@ -38,7 +38,7 @@
 <script>
 export default {
   props: {
-    loading: Boolean,
+    loading: { type: Boolean, required: true},
   },
 };
 </script>
