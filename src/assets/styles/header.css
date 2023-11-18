@@ -1,0 +1,39 @@
+header {
+  background-color: var(--header-bg);
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8px;
+  color: var(--text-main);
+}
+
+.header-controls {
+  display: flex;
+}
+
+.collapse-icon {
+  color: rgba(255, 255, 255, 0.7);
+  transition: 0.2s linear;
+  cursor: pointer;
+}
+
+.header-color__pallete {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-color__pallete div {
+  margin: 0 0.3em;
+}
+
+.sun__image {
+  fill: #ffff88;
+}
+.moon__image {
+  fill: #d4cec2;
+}
+.header-lang__switch {
+    margin-right: 0.9em;
+}

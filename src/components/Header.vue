@@ -5,8 +5,8 @@
         <s-icon name="bars" scale="2" />
       </span>
     </div>
-    <div class="right-block">
-      <CMenu style="margin-right: 1em;">
+    <div class="header-controls">
+      <CMenu class="header-lang__switch">
         <template #activator>
           RU
         </template>
@@ -14,9 +14,9 @@
         <li>EN</li>
       </CMenu>
       <div class="header-color__pallete">
-        <s-icon name="sun" scale="1" style="fill: white;"/>
+        <s-icon name="sun" scale="1" class="sun__image" />
         <CSwitch :value="isDarkPallete" @input="onChangePallete" style="display: flex;" />
-        <s-icon name="moon" scale="1" />
+        <s-icon name="moon" scale="1" class="moon__image"/>
       </div>
     </div>
   </header>
@@ -78,29 +78,5 @@ export default {
 </script>
 
 <style scoped>
-header {
-  background-color: var(--header-bg);
-  position: relative;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 8px;
-  color: var(--text-main);
-}
-
-.right-block {
-  display: flex;
-}
-
-.collapse-icon {
-  color: rgba(255, 255, 255, 0.7);
-  transition: 0.2s linear;
-  cursor: pointer;
-}
-
-.header-color__pallete {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+@import '@/assets/styles/header.css';
 </style>

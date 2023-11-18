@@ -4,19 +4,14 @@
     <Header />
     <SidebarMenu />
     <!-- 16 left and right sidebar padding sum -->
-    <div>
+    <div class="main__container">
       <router-view />
     </div>
   </div>
 </template>
 
 <style>
-body {
-  margin: 0;
-}
-.pointer {
-  cursor: pointer;
-}
+@import '@/assets/styles/general.css';
 </style>
 
 <script>
