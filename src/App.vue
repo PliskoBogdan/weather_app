@@ -19,8 +19,8 @@ import { mapActions, mapGetters } from "vuex";
 
 import ColorPallete from "@/services/ColorPallete";
 
-import SidebarMenu from "./components/SidebarMenu.vue";
-import Header from "./components/Header.vue";
+import SidebarMenu from "@/components/SidebarMenu.vue";
+import Header from "@/components/Header/Header.vue";
 
 export default {
   components: {

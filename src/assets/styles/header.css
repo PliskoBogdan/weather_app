@@ -4,7 +4,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0 8px;
+  padding: 0.3em 0.5em;
   color: var(--text-main);
 }
 
@@ -13,8 +13,7 @@ header {
 }
 
 .collapse-icon {
-  color: rgba(255, 255, 255, 0.7);
-  transition: 0.2s linear;
+  fill: var(--header-bar);
   cursor: pointer;
 }
 
@@ -36,4 +35,7 @@ header {
 }
 .header-lang__switch {
     margin-right: 0.9em;
+}
+.header-lang__switch-activator, .header-lang__switch-lang {
+  text-transform: uppercase;
 }

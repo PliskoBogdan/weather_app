@@ -1,18 +1,8 @@
 <template>
-  <header :style="{ height: `${headerHeight}px` }">
-    <div>
-      <span class="collapse-icon" @click="openSidebar">
-        <s-icon name="bars" scale="2" />
-      </span>
-    </div>
+  <header>
+    <s-icon class="collapse-icon" @click="openSidebar" name="bars" scale="2" />
     <div class="header-controls">
-      <CMenu class="header-lang__switch">
-        <template #activator>
-          RU
-        </template>
-        <li>RU</li>
-        <li>EN</li>
-      </CMenu>
+      <LocaleSwitch />
       <div class="header-color__pallete">
         <s-icon name="sun" scale="1" class="sun__image" />
         <CSwitch :value="isDarkPallete" @input="onChangePallete" style="display: flex;" />
@@ -25,24 +15,21 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 
-import { headerHeight } from "@/vars/index";
-
 import { EventBus } from "@/main";
 
 import CSwitch from "@/components/CSwitch.vue";
-import CMenu from '@/components/CMenu';
+import LocaleSwitch from './LocaleSwitch.vue'
 
 import ColorPallete from '@/services/ColorPallete'
 
 export default {
   components: {
     CSwitch,
-    CMenu
+    LocaleSwitch
   },
 
   data() {
     return {
-      headerHeight,
       isDarkPallete: false,
     };
   },
@@ -57,6 +44,10 @@ export default {
 
   methods: {
     ...mapActions(['setCurrentPalleteInStorage']),
+
+    changeLocale(locale) {
+      this.$i18n.changeLocale(locale)
+    },
 
     onChangePallete(value) {
       this.isDarkPallete = value;

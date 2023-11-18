@@ -9,6 +9,7 @@ import 'vue-awesome/icons'
 // Components
 import Icon from 'vue-awesome/components/Icon'
 import Preloader from '@/components/Preloader.vue'
+import i18n from './i18n'
 
 Vue.component('s-icon', Icon)
 
@@ -19,7 +20,7 @@ export const EventBus = new Vue();
 Vue.directive('preloader', {
   bind(el, binding) {
     const preloader = new Vue({
-      render: (h) => h(Preloader, { props: { loading: binding.value } }),
+      render: (h) => h(Preloader, { props: { loading: binding.value } })
     }).$mount();
 
     el.appendChild(preloader.$el);
@@ -36,6 +37,7 @@ Vue.directive('preloader', {
 Vue.config.productionTip = false
 
 new Vue({
+  i18n,
   router,
   store,
   render: h => h(App)

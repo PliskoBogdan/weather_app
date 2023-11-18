@@ -5,6 +5,7 @@ class ColorPallete {
     "--sidebar-item-active": "#2c3e50",
     "--text-main": "#ffffff",
     "--header-bg": "blue",
+    "--header-bar": "#d8d8d8"
   };
 
   static darkPalleteVars = {
@@ -13,6 +14,7 @@ class ColorPallete {
     "--sidebar-item-active": "#2c3e50",
     "--text-main": "#ffffff",
     "--header-bg": "#333333",
+    "--header-bar": "#d8d8d8"
   };
 
   /**

@@ -1,1 +1,1 @@
-export const headerHeight = 50;
+export const locales = ['en', 'ru'];
