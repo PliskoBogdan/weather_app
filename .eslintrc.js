@@ -3,6 +3,7 @@ module.exports = {
   env: {
     node: true
   },
+  "plugins": ["jest"],
   'extends': [
     'plugin:vue/essential',
     'eslint:recommended'
@@ -14,7 +15,8 @@ module.exports = {
     'no-console': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'no-debugger': process.env.NODE_ENV === 'production' ? 'warn' : 'off',
     'vue/no-parsing-error': 'off',
-    'vue/multi-word-component-names': 'off'
+    'vue/multi-word-component-names': 'off',
+    'no-undef': 'off'
   },
   overrides: [
     {
