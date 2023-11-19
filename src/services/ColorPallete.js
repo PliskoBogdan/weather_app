@@ -1,8 +1,8 @@
 class ColorPallete {
   static lightPalleteVars = {
     "--accent-primary": "#919499",
-    "--sidebar-bg-color": "red",
-    "--sidebar-item-hover": "green",
+    "--sidebar-bg-color": "#42639f",
+    "--sidebar-item-hover": "#5381af",
     "--sidebar-item-active": "#2c3e50",
     "--text-main": "#ffffff",
     "--main-soul": "#2058bf",

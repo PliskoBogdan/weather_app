@@ -38,6 +38,7 @@ export default {
   text-decoration: none;
   display: flex;
   align-items: center;
+  transition: .4s;
 }
 .link span {
   margin-left: 0.25em;

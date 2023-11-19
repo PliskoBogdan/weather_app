@@ -26,22 +26,26 @@ export default {
     };
   },
 
-  created() {
-    this.isInFavorite = this.findIndexCurrentLocationInFavorite() !== -1;
-  },
-
   computed: {
     ...mapGetters(["model"]),
+  },
+
+  watch: {
+    model: {
+      handler() {
+        this.isInFavorite = this.findIndexCurrentLocationInFavorite() !== -1;
+      },
+      immediate: true,
+      deep: true
+    }
   },
 
   methods: {
     findIndexCurrentLocationInFavorite() {
       try {
         const favorite = JSON.parse(localStorage.getItem("favorite"));
-        // TO-DO create method for title validation and creation
-        const indexFavorite = favorite.findIndex(({ title }) => title === `${this.model.country}, ${this.model.city}`);
-
-        
+        // TO-DO move this var
+        const indexFavorite = favorite.findIndex(({ latitude, longitude }) => latitude === this.model.latitude && longitude === this.model.longitude);
         return indexFavorite;
       } catch (error) {
         return -1;
@@ -64,7 +68,6 @@ export default {
           favorite.splice(indexCurrentLocationInFavorit, 1)
           this.isInFavorite = false;
         } else {
-          // TO-DO create method for title validation and creation
           favorite.push({ latitude, longitude, title: `${this.model.country}, ${this.model.city}` });
           this.isInFavorite = true;
         }

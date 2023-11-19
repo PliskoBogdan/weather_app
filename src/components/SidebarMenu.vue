@@ -66,10 +66,10 @@ export default {
 .left-drawer {
   position: absolute;
   top: 0;
-  width: 0; /* initially */
+  width: 0;
   overflow: hidden;
   height: 100vh;
-  padding-left: 0; /* initially */
+  padding-left: 0;
   background: var(--sidebar-bg-color);
   z-index: 200;
   transition: all 0.2s;
@@ -79,7 +79,7 @@ export default {
   position: absolute;
   left: 0;
   top: 0;
-  width: 0; /* initially */
+  width: 0;
   height: 100vh;
   background: #000;
   opacity: 0.3;
