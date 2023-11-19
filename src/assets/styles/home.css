@@ -1,0 +1,11 @@
+.home {
+  padding: 1em;
+  background-color: var(--main-soul);
+  margin-top: 50px;
+}
+
+.home-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

@@ -14,11 +14,14 @@ export default new Vuex.Store({
       country: null,
       city: null,
       list: {},
+      latitude: 0,
+      longitude: 0
     },
   },
 
   getters: {
     currentPallete: (state) => state.currentPallete,
+    model: (state) => state.model
   },
   mutations: {
     SET_CURRENT_APP_PALLETE(state, payload) {
@@ -28,19 +31,21 @@ export default new Vuex.Store({
     SET_WEATHER(state, payload) {
       state.model.country = payload.city.country;
       state.model.city = payload.city.name;
-      state.list = weatherByDaysMapper(payload.list);
+      state.model.list = weatherByDaysMapper(payload.list);
+      state.model.latitude = payload.latitude
+      state.model.longitude = payload.longitude
     },
   },
   actions: {
     async getUserLocationWeather({ commit }, { latitude, longitude, lang }) {
       const { data } = await axios.get(
-        `forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${lang}`
+        `forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${lang}&units=metric`
       );
 
       // const a = await axios.get(
       //   `forecast?q=Kharkiv&lang=ua&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}`
       // );
-      commit("SET_WEATHER", data);
+      commit("SET_WEATHER", { ...data, latitude, longitude });
     },
 
     setCurrentPalleteInStorage({ commit }, theme) {

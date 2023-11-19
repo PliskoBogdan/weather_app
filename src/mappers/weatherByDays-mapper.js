@@ -14,6 +14,10 @@ export default function weatherByDaysMapper(list) {
     const dateText = curr.dt_txt;
     const date = dateText.match(pattern)[1];
 
+    if (i === 0) {
+      weatherByDay[0] = curr
+    }
+
     if (!weatherByDay[date]) {
       weatherByDay[date] = [];
     }

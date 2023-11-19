@@ -1,19 +1,21 @@
 class ColorPallete {
   static lightPalleteVars = {
+    "--accent-primary": "#919499",
     "--sidebar-bg-color": "red",
     "--sidebar-item-hover": "green",
     "--sidebar-item-active": "#2c3e50",
     "--text-main": "#ffffff",
-    "--header-bg": "blue",
+    "--main-soul": "#2058bf",
     "--header-bar": "#d8d8d8"
   };
 
   static darkPalleteVars = {
+    "--accent-primary": "#919499",
     "--sidebar-bg-color": "#333333",
     "--sidebar-item-hover": "#f1f1f1",
     "--sidebar-item-active": "#2c3e50",
     "--text-main": "#ffffff",
-    "--header-bg": "#333333",
+    "--main-soul": "#333333",
     "--header-bar": "#d8d8d8"
   };
 

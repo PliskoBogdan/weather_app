@@ -8,3 +8,9 @@ body {
   max-width: 1200px;
   margin: 0 auto;
 }
+.mt-2 {
+  margin-top: 2em;
+}
+.mt-1 {
+  margin-top: 1em;
+}

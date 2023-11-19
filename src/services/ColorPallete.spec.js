@@ -12,7 +12,7 @@ describe('ColorPallete', () => {
     expect(document.documentElement.style.getPropertyValue('--sidebar-item-hover')).toBe('green');
     expect(document.documentElement.style.getPropertyValue('--sidebar-item-active')).toBe('#2c3e50');
     expect(document.documentElement.style.getPropertyValue('--text-main')).toBe('#ffffff');
-    expect(document.documentElement.style.getPropertyValue('--header-bg')).toBe('blue');
+    expect(document.documentElement.style.getPropertyValue('--main-soul')).toBe('blue');
   });
 
   it('should set dark theme variables', () => {
@@ -22,7 +22,7 @@ describe('ColorPallete', () => {
     expect(document.documentElement.style.getPropertyValue('--sidebar-item-hover')).toBe('#f1f1f1');
     expect(document.documentElement.style.getPropertyValue('--sidebar-item-active')).toBe('#2c3e50');
     expect(document.documentElement.style.getPropertyValue('--text-main')).toBe('#ffffff');
-    expect(document.documentElement.style.getPropertyValue('--header-bg')).toBe('#333333');
+    expect(document.documentElement.style.getPropertyValue('--main-soul')).toBe('#333333');
   });
 
   it('should not set invalid theme variables', () => {
