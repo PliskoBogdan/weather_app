@@ -80,7 +80,7 @@ export default {
 <style scoped>
 .weather__card {
   position: relative;
-  background-color: #b9b7b7;
+  background-color: white;
   border-radius: 0px 4px 4px 4px;
 }
 .weather__card-header {
@@ -98,7 +98,7 @@ export default {
   border-bottom: 0;
   border-right: none;
   cursor: pointer;
-  background: #b9b7b7;
+  background-color: var(--bg-button);
   color: var(--text-main);
   transition: 0.5s;
 }
