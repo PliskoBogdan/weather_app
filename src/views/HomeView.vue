@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="home-header">
-      <div>Input</div>
+      <div>
+        <CAutocomplete :list="list" @search="onSearch" itemValue="title" />
+      </div>
       <div class="home-add__favorite">
         <CButton @click="addToFavorite">{{
           isInFavorite ? $t("Delete from Favorite") : $t("Add to favorite")
@@ -15,11 +17,15 @@
 <script>
 import { mapGetters } from "vuex";
 
+import { findLocationByQuery } from '@/api/index'
+
 import CButton from "@/components/CButton.vue";
 import WeatherCard from "@/components/WeatherCard.vue";
+import CAutocomplete from '@/components/CAutocomplete';
 
 export default {
   components: {
+    CAutocomplete,
     CButton,
     WeatherCard,
   },
@@ -27,6 +33,7 @@ export default {
   data() {
     return {
       isInFavorite: false,
+      list: []
     };
   },
 
@@ -45,6 +52,16 @@ export default {
   },
 
   methods: {
+    async onSearch(value) {
+
+      // this.list = [{ id: 1, name: 'Kharkiv' }, { id: 2, name: "USA" }];
+      const data = await findLocationByQuery(value)
+      this.list = data.map(e => { 
+        const stateByLocale = e?.local_names?.[this.$i18n.locale] ? `${e.local_names[this.$i18n.locale]},` : "";
+
+        return { title: `${e.country}, ${stateByLocale} ${e.state || e.name}`, id: e.lat, }  
+      })
+    },
     findIndexCurrentLocationInFavorite() {
       try {
         const favorite = JSON.parse(localStorage.getItem("favorite"));

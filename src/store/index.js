@@ -39,7 +39,7 @@ export default new Vuex.Store({
   actions: {
     async getUserLocationWeather({ commit }, { latitude, longitude, lang }) {
       const { data } = await axios.get(
-        `forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${lang}&units=metric`
+        `data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${lang}&units=metric`
       );
 
       // const a = await axios.get(

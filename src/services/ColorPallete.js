@@ -9,7 +9,8 @@ class ColorPallete {
     "--header-bar": "#d8d8d8",
     "--hover": "#9d9d9d",
     "--main-background": "#fff",
-    "--bg-button": "#b9b7b7"
+    "--bg-button": "#b9b7b7",
+    "--bg-menu": "#8d8d8d",
   };
 
   static darkPalleteVars = {
@@ -22,7 +23,8 @@ class ColorPallete {
     "--header-bar": "#d8d8d8",
     "--hover": "#9d9d9d",
     "--main-background": "#363636",
-    "--bg-button": "#b9b7b7"
+    "--bg-button": "#b9b7b7",
+    "--bg-menu": "#8d8d8d",
   };
 
   /**

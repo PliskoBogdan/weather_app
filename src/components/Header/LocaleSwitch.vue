@@ -13,7 +13,6 @@
     >
       {{ locale }}
     </li>
-    <!-- <li @click="changeLocale('eu')">EN</li> -->
   </CMenu>
 </template>
 

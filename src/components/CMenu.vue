@@ -49,10 +49,11 @@ ul {
 li {
   padding: 8px;
   cursor: pointer;
+  color: var(--text-main);
   transition: background-color 0.3s;
 }
 
 li:hover {
-  background-color: #8d8d8d;
+  background-color: var(--bg-menu);
 }
 </style>
