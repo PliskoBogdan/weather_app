@@ -3,7 +3,9 @@
     <div class="home-header">
       <div>Input</div>
       <div class="home-add__favorite">
-        <button @click="addToFavorite">{{ isInFavorite ? $t('Delete from Favorite') : $t("Add to favorite") }}</button>
+        <CButton @click="addToFavorite">{{
+          isInFavorite ? $t("Delete from Favorite") : $t("Add to favorite")
+        }}</CButton>
       </div>
     </div>
     <WeatherCard class="mt-2" />
@@ -13,10 +15,12 @@
 <script>
 import { mapGetters } from "vuex";
 
+import CButton from "@/components/CButton.vue";
 import WeatherCard from "@/components/WeatherCard.vue";
 
 export default {
   components: {
+    CButton,
     WeatherCard,
   },
 
@@ -36,8 +40,8 @@ export default {
         this.isInFavorite = this.findIndexCurrentLocationInFavorite() !== -1;
       },
       immediate: true,
-      deep: true
-    }
+      deep: true,
+    },
   },
 
   methods: {
@@ -45,14 +49,24 @@ export default {
       try {
         const favorite = JSON.parse(localStorage.getItem("favorite"));
         // TO-DO move this var
-        const indexFavorite = favorite.findIndex(({ latitude, longitude }) => latitude === this.model.latitude && longitude === this.model.longitude);
+        const indexFavorite = favorite.findIndex(
+          ({ latitude, longitude }) =>
+            latitude === this.model.latitude &&
+            longitude === this.model.longitude
+        );
         return indexFavorite;
       } catch (error) {
         return -1;
       }
     },
 
-    addToFavorite() {
+    async addToFavorite() {
+      if (this.isInFavorite) {
+        const result = await this.$confirm("Вы уверены?");
+        if (!result) {
+          return;
+        }
+      }
       const { latitude, longitude } = this.model;
 
       try {
@@ -62,18 +76,22 @@ export default {
           return;
         }
 
-        const indexCurrentLocationInFavorit = this.findIndexCurrentLocationInFavorite()
+        const indexCurrentLocationInFavorit =
+          this.findIndexCurrentLocationInFavorite();
 
         if (indexCurrentLocationInFavorit !== -1) {
-          favorite.splice(indexCurrentLocationInFavorit, 1)
+          favorite.splice(indexCurrentLocationInFavorit, 1);
           this.isInFavorite = false;
         } else {
-          favorite.push({ latitude, longitude, title: `${this.model.country}, ${this.model.city}` });
+          favorite.push({
+            latitude,
+            longitude,
+            title: `${this.model.country}, ${this.model.city}`,
+          });
           this.isInFavorite = true;
         }
 
         localStorage.setItem("favorite", JSON.stringify(favorite));
-
       } catch (error) {
         console.error("Error when add to favorite--", error);
       }

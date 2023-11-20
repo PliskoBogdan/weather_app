@@ -4,8 +4,10 @@
     <Header />
     <SidebarMenu />
     <!-- 16 left and right sidebar padding sum -->
-    <div v-preloader="isLoading" class="main__container">
-      <router-view />
+    <div v-preloader="isLoading" class="main__wrapper">
+      <div class="container">
+        <router-view />
+      </div>
     </div>
   </div>
 </template>

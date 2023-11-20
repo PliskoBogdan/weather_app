@@ -1,6 +1,6 @@
 <template>
   <router-link :to="to" class="link" :class="{ active: isActive }">
-    <s-icon :name="icon" />
+    <s-icon :name="icon" class="link-icon" />
       <span>
         <slot />
       </span>
@@ -45,7 +45,7 @@ export default {
 }
 
 .link:hover {
-  background-color: var(--sidebar-item-hover);
+  background-color: var(--hover);
 }
 .link.active {
   background-color: var(--sidebar-item-active);

@@ -106,7 +106,7 @@ export default {
   border-radius: 10px 0px 0px 0px;
 }
 .weather__card-tab:hover {
-  background: #625f65;
+  background: var(--hover);
 }
 .weather__card-tab-active {
   background: var(--accent-primary);

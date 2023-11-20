@@ -4,13 +4,27 @@ body {
 .pointer {
   cursor: pointer;
 }
-.main__container {
-  max-width: 1200px;
-  margin: 0 auto;
+.main__wrapper {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  height: 100vh;
+  background-color: var(--main-background);
+}
+.container {
+  width: 1200px;
+  background-color: var(--main-background);
+  /* Добавим немного отступов для красоты */
+  padding: 20px;
+  box-sizing: border-box;
 }
 .mt-2 {
   margin-top: 2em;
 }
 .mt-1 {
   margin-top: 1em;
+}
+.mr-1 {
+  margin-right: 0.5em;
 }
