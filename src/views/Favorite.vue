@@ -62,7 +62,6 @@ export default {
       const payload = {
         latitude: item.latitude,
         longitude: item.longitude,
-        lang: this.$i18n.locale,
       };
 
       await this.getUserLocationWeather(payload);

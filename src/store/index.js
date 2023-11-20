@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
+
 import axios from "@/api/axios";
+import i18n from "@/i18n"
 
 import weatherByDaysMapper from "@/mappers/weatherByDays-mapper";
 
@@ -37,9 +39,9 @@ export default new Vuex.Store({
     },
   },
   actions: {
-    async getUserLocationWeather({ commit }, { latitude, longitude, lang }) {
+    async getUserLocationWeather({ commit }, { latitude, longitude }) {
       const { data } = await axios.get(
-        `data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${lang}&units=metric`
+        `data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${i18n.locale}&units=metric`
       );
 
       // const a = await axios.get(

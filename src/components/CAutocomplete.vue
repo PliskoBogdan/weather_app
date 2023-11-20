@@ -8,9 +8,9 @@
     />
     <ul v-if="showSuggestions" class="suggestions">
       <li
-        v-for="(item) in list"
+        v-for="item in filteredSuggestions"
         :key="item[listKey] || index"
-        @mousedown.prevent="selectSuggestion(item, $event)"
+        @mousedown.prevent="selectSuggestion(item)"
       >
         {{ item[itemValue] }}
       </li>
@@ -19,12 +19,12 @@
 </template>
 
 <script>
-import debounce from '@/utils/debounce';
+import debounce from "@/utils/debounce";
 
 export default {
   props: {
     list: { type: Array, required: true },
-    listKey: { type: String, required: false, default: 'id' },
+    listKey: { type: String, required: false, default: "id" },
     itemValue: { type: String, required: false, default: "id" },
   },
 
@@ -32,11 +32,18 @@ export default {
     return {
       inputValue: "",
       showSuggestions: false,
+      filteredSuggestions: [],
     };
   },
 
   created() {
     this.debouncedInput = debounce(this.handleInput, 300);
+  },
+
+  watch: {
+    list(value) {
+      this.filteredSuggestions = value
+    }
   },
 
   methods: {
@@ -45,7 +52,9 @@ export default {
       this.showSuggestions = this.inputValue.length > 0;
       this.inputValue = value;
       if (value.length > 2) {
-          this.$emit("search", value);
+        this.$emit("search", value);
+      } else {
+        this.filteredSuggestions = [];
       }
     },
     handleFocus() {
@@ -54,13 +63,11 @@ export default {
     handleBlur() {
       this.showSuggestions = false;
     },
-    selectSuggestion(item, event) {
-      debugger
+    selectSuggestion(item) {
       const value = item[this.itemValue];
       this.inputValue = value;
       this.showSuggestions = false;
       this.$emit("input", { item: item, value });
-      event.stopPropagation();
     },
   },
 };
@@ -68,22 +75,22 @@ export default {
 
 <style scoped>
 .CAutocomplete {
-    position: relative;
+  position: relative;
 }
 .CAutocomplete input {
-    transition: .3s;
-    background-color: var(--bg-button);
-    border: none;
-    border-radius: 0.2em;
-    color: #3c3c3c;
+  transition: 0.3s;
+  background-color: var(--bg-button);
+  border: none;
+  border-radius: 0.2em;
+  color: #3c3c3c;
 }
 .CAutocomplete input:focus {
-    outline: none;
-    border: 1px solid #8d8d8d;
+  outline: none;
+  border: 1px solid #8d8d8d;
 }
 .suggestions {
-    position: absolute;
-    z-index: 999;
+  position: absolute;
+  z-index: 999;
   list-style-type: none;
   padding: 0;
   margin: 0;
@@ -97,18 +104,18 @@ export default {
   padding: 8px;
   cursor: pointer;
   border-bottom: 1px solid #333;
-  color: var(--text-main)
+  color: var(--text-main);
 }
 
 .suggestions li:last-child {
-    border-bottom: none;
+  border-bottom: none;
 }
 
 .suggestions li:hover {
-    border-radius: 5px;
+  border-radius: 5px;
   background-color: var(--hover);
 }
 .suggestions li:hover:first-child {
-    border-radius: 5px 5px 0px 0px;
+  border-radius: 5px 5px 0px 0px;
 }
 </style>

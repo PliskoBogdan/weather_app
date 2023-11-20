@@ -2,7 +2,12 @@
   <div class="home">
     <div class="home-header">
       <div>
-        <CAutocomplete :list="list" @search="onSearch" itemValue="title" />
+        <CAutocomplete
+          :list="list"
+          @search="onSearch"
+          @input="getNewWeather"
+          itemValue="title"
+        />
       </div>
       <div class="home-add__favorite">
         <CButton @click="addToFavorite">{{
@@ -15,13 +20,13 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
-import { findLocationByQuery } from '@/api/index'
+import { findLocationByQuery } from "@/api/index";
 
 import CButton from "@/components/CButton.vue";
 import WeatherCard from "@/components/WeatherCard.vue";
-import CAutocomplete from '@/components/CAutocomplete';
+import CAutocomplete from "@/components/CAutocomplete";
 
 export default {
   components: {
@@ -33,7 +38,7 @@ export default {
   data() {
     return {
       isInFavorite: false,
-      list: []
+      list: [],
     };
   },
 
@@ -52,16 +57,31 @@ export default {
   },
 
   methods: {
+    ...mapActions(['getUserLocationWeather']),
+    
     async onSearch(value) {
-
       // this.list = [{ id: 1, name: 'Kharkiv' }, { id: 2, name: "USA" }];
-      const data = await findLocationByQuery(value)
-      this.list = data.map(e => { 
-        const stateByLocale = e?.local_names?.[this.$i18n.locale] ? `${e.local_names[this.$i18n.locale]},` : "";
+      const data = await findLocationByQuery(value);
+      this.list = data.map((e) => {
+        const stateByLocale = e?.local_names?.[this.$i18n.locale]
+          ? `${e.local_names[this.$i18n.locale]},`
+          : "";
 
-        return { title: `${e.country}, ${stateByLocale} ${e.state || e.name}`, id: e.lat, }  
-      })
+        return {
+          title: `${e.country}, ${stateByLocale} ${e.state || e.name}`,
+          id: e.lat,
+          lat: e.lat,
+          lon: e.lon,
+        };
+      });
     },
+
+    async getNewWeather(event) {
+      const { lat, lon } = event.item;
+      const payload = { latitude: lat, longitude: lon }
+      await this.getUserLocationWeather(payload)
+    },
+
     findIndexCurrentLocationInFavorite() {
       try {
         const favorite = JSON.parse(localStorage.getItem("favorite"));
