@@ -6,6 +6,7 @@ import App from "./App.vue";
 import router from "./router";
 import store from "./store";
 import i18n from "./i18n";
+import moment from 'moment'
 
 import setGlobalComponents from "@/utils/setGlobalComponents.js";
 import setCustomFilters from "@/filters/index";
@@ -14,7 +15,7 @@ import ConfirmPlugin from "@/plugins/confirmPlugin";
 
 setGlobalComponents(Vue)
 setCustomDirectives(Vue);
-setCustomFilters(Vue);
+setCustomFilters();
 
 // Plugins
 Vue.use(ConfirmPlugin);
@@ -24,6 +25,7 @@ export const EventBus = new Vue();
 
 Vue.config.productionTip = false;
 new Vue({
+  moment,
   i18n,
   router,
   store,

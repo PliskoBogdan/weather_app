@@ -3,14 +3,14 @@
     <div class="weather__card-header">
       <div
         class="weather__card-tab"
-        :class="{ 'weather__card-tab-active': activeTab === 0 }"
+        :class="{ 'weather__card-tab-active': activeTabIndex === 0 }"
         @click="onChangeTab(0)"
       >
         {{ $t("day") }}
       </div>
       <div
         class="weather__card-tab"
-        :class="{ 'weather__card-tab-active': activeTab === 1 }"
+        :class="{ 'weather__card-tab-active': activeTabIndex === 1 }"
         @click="onChangeTab(1)"
       >
         {{ $t("week") }}
@@ -25,7 +25,7 @@
           height="50px"
           alt="weather_icon"
         />
-        <span> {{ currentDayWeather.temp }} °C </span>
+        <span> {{ Math.round(currentDayWeather.temp) }} °C </span>
       </div>
       <div>
         {{ $t("Feels like") }} {{ currentDayWeather.feelsLike }},
@@ -33,14 +33,31 @@
       </div>
     </div>
 
-    <div v-else>Days tab</div>
+    <template v-else>
+      <div class="truncated__cards">
+        <TruncatedWeatherCard
+          v-for="(item, key) in model.list"
+          :item="item"
+          :key="key"
+          @select="select"
+        />
+      </div>
+    </template>
   </div>
 </template>
 
 <script>
 import { mapGetters } from "vuex";
 
+import getMidDayItemIndex from "@/utils/getMidDayItemIndex";
+
+import TruncatedWeatherCard from "@/components/TruncatedWeatherCard.vue";
+
 export default {
+  components: {
+    TruncatedWeatherCard,
+  },
+
   data() {
     return {
       activeTab: 0,
@@ -48,11 +65,13 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["model"]),
+    ...mapGetters(["model", "activeTabIndex"]),
 
     currentDayWeather() {
       const currentTimeStampInfo = this.model.currentTimeStampInfo;
-      const currWeather = currentTimeStampInfo?.weather?.[0] || {};
+      const midDayItem = getMidDayItemIndex(currentTimeStampInfo?.weather);
+
+      const currWeather = currentTimeStampInfo?.weather?.[midDayItem] || {};
 
       const data = {
         temp: Math.round(currentTimeStampInfo?.main?.temp || 0),
@@ -65,19 +84,34 @@ export default {
     },
 
     singleDayTabActive() {
-      return this.activeTab === 0;
+      return this.activeTabIndex === 0;
     },
   },
 
   methods: {
+    select(currentDayList) {
+      const midDayItem = getMidDayItemIndex(currentDayList)
+      const data = currentDayList[midDayItem];
+      this.$store.commit("SET_CURRENT_TIME_STAMP_INFO", data);
+      this.$store.commit("SET_ACTIVE_TAB", 0);
+    },
+
     onChangeTab(value) {
-      this.activeTab = value;
+      this.$store.commit("SET_ACTIVE_TAB", value);
     },
   },
 };
 </script>
 
 <style scoped>
+.truncated__cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  border: 1px solid var(--bg-button);
+  background-color: var(--main-soul);
+  border-radius: 3px;
+}
 .weather__card {
   position: relative;
   background-color: white;
@@ -86,7 +120,7 @@ export default {
 .weather__card-header {
   position: absolute;
   display: flex;
-  top: -2em;
+  top: -1.9em;
   left: -1px;
 }
 .weather__card-tab {
@@ -119,5 +153,11 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+@media screen and (max-width: 500px) {
+  .weather__card {
+    margin-top: 2.4em;
+  }
 }
 </style>

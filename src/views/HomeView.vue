@@ -1,7 +1,7 @@
 <template>
   <div class="home">
-    <div class="home-header">
-      <div>
+    <div class="home-header" :class="{ 'justify-center': !isActiveFirstTab }">
+      <div v-if="isActiveFirstTab">
         <CAutocomplete
           :list="list"
           @search="onSearch"
@@ -43,7 +43,11 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["model"]),
+    ...mapGetters(["model", "activeTabIndex"]),
+
+    isActiveFirstTab() {
+      return this.activeTabIndex === 0;
+    },
   },
 
   watch: {
@@ -57,8 +61,8 @@ export default {
   },
 
   methods: {
-    ...mapActions(['getUserLocationWeather']),
-    
+    ...mapActions(["getUserLocationWeather"]),
+
     async onSearch(value) {
       const data = await findLocationByQuery(value);
       this.list = data.map((e) => {
@@ -77,8 +81,8 @@ export default {
 
     async getNewWeather(event) {
       const { lat, lon } = event.item;
-      const payload = { latitude: lat, longitude: lon }
-      await this.getUserLocationWeather(payload)
+      const payload = { latitude: lat, longitude: lon };
+      await this.getUserLocationWeather(payload);
     },
 
     findIndexCurrentLocationInFavorite() {

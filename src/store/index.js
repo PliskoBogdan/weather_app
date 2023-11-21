@@ -12,6 +12,7 @@ export default new Vuex.Store({
   state: {
     currentPallete: null,
     loadingsList: [],
+    activeTabIndex: 0,
     model: {
       country: null,
       city: null,
@@ -25,9 +26,14 @@ export default new Vuex.Store({
   getters: {
     currentPallete: (state) => state.currentPallete,
     model: (state) => state.model,
-    loadingsList: (state) => state.loadingsList
+    loadingsList: (state) => state.loadingsList,
+    activeTabIndex: (state) => state.activeTabIndex
   },
   mutations: {
+    SET_ACTIVE_TAB(state, index) {
+      state.activeTabIndex = index
+    },
+
     ADD_LOADING_PROCESS(state, id) {
       state.loadingsList.push({ id })
     },
@@ -39,6 +45,10 @@ export default new Vuex.Store({
 
     SET_CURRENT_APP_PALLETE(state, payload) {
       state.currentPallete = payload;
+    },
+
+    SET_CURRENT_TIME_STAMP_INFO(state, payload) {
+      state.model.currentTimeStampInfo = payload;
     },
 
     SET_WEATHER(state, payload) {

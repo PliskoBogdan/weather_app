@@ -15,9 +15,14 @@ body {
 .container {
   width: 1200px;
   background-color: var(--main-background);
-  /* Добавим немного отступов для красоты */
   padding: 20px;
   box-sizing: border-box;
+}
+.justify-center {
+  justify-content: center !important;
+}
+.text-center {
+  text-align: center;
 }
 .d-none {
   visibility: hidden;;

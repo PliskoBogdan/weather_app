@@ -13,6 +13,7 @@
   border-radius: 4px;
   cursor: pointer;
   transition: background-color 0.3s ease;
+  text-align: center;
 }
 .CButton:hover {
   background-color: var(--hover);
