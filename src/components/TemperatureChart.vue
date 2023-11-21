@@ -128,9 +128,11 @@ export default {
     handleResize() {
       const stage = this.$refs.chart.getCurrentChart();
       if (window.innerWidth < 1200 && window.innerWidth > 650) {
+        stage.canvas.parentNode.style.height = `${window.innerHeight - 100}px`;
         stage.canvas.parentNode.style.width = `${window.innerWidth - 100}px`;
         stage.resize();
       } else if (window.innerWidth <= 650) {
+        stage.canvas.parentNode.style.height = `${window.innerHeight - 100}px`;
         stage.canvas.parentNode.style.width = `${window.innerWidth - 80}px`;
         stage.resize();
       } else {
