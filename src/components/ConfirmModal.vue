@@ -9,8 +9,6 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
-
 import CButton from '@/components/CButton.vue';
 
 export default {
@@ -23,10 +21,6 @@ export default {
 
   components: {
     CButton
-  },
-
-  computed: {
-    ...mapGetters(["currentPallete"]),
   },
 
   methods: {
