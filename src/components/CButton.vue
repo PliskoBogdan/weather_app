@@ -17,4 +17,16 @@
 .CButton:hover {
   background-color: var(--hover);
 }
+
+@media screen and (max-width: 1200px) {
+  .CButton {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .CButton {
+    font-size: 0.9em;
+  }
+}
 </style>
