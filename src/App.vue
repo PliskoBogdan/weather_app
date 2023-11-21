@@ -4,7 +4,7 @@
     <Header />
     <SidebarMenu />
     <!-- 16 left and right sidebar padding sum -->
-    <div v-preloader="isShowPreloader" class="main__wrapper">
+    <div v-preloader="isShowPreloader" class="main__wrapper" :class="{ 'favorit_container': activeTabIndex === 1 }">
       <div class="container">
         <router-view />
       </div>
@@ -70,7 +70,7 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["currentPallete", "loadingsList"]),
+    ...mapGetters(["currentPallete", "loadingsList", "activeTabIndex"]),
 
     isShowPreloader() {
       return this.loadingsList.length > 0;

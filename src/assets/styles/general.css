@@ -18,6 +18,9 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
+.favorit_container {
+  height: 100vh;
+}
 .text-main {
   color: var(--text-main)
 }
@@ -49,6 +52,14 @@ body {
 @media screen and (max-width: 1000px) {
   body {
     font-size: 1.4em;
+  }
+
+  .favorit_container {
+    height: 100%;
+  }
+  .favorit_container .weather__card {
+    padding-top: 1.6em;
+    background-color: var(--main-soul) !important;
   }
 }
 

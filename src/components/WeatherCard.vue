@@ -237,6 +237,10 @@ export default {
     padding-top: 65px;
     background-color: var(--main-soul)
   }
+
+  .truncated__cards {
+    margin-top: 30px;
+  }
 }
 .weather__card-dark .weather__card-tab-active {
   background-color: #737477;

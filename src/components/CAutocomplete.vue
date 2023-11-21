@@ -139,7 +139,7 @@ export default {
 
 @media screen and (max-width: 550px) {
   .CAutocomplete input {
-    font-size: 1em;
+    font-size: 0.9em;
   }
 }
 </style>
