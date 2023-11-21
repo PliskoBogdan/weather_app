@@ -51,12 +51,12 @@ export default {
     ...mapGetters(["model"]),
 
     currentDayWeather() {
-      const model = this.model.list?.[0];
-      const currWeather = model?.weather?.[0] || {};
+      const currentTimeInfo = this.model.currentTimeInfo;
+      const currWeather = currentTimeInfo?.weather?.[0] || {};
 
       const data = {
-        temp: Math.round(model?.main?.temp || 0),
-        feelsLike: Math.round(model?.main?.feelsLike || 0),
+        temp: Math.round(currentTimeInfo?.main?.temp || 0),
+        feelsLike: Math.round(currentTimeInfo?.main?.feelsLike || 0),
         icon: currWeather.icon || "",
         description: currWeather.description || "",
       };

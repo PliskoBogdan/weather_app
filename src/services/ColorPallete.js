@@ -44,6 +44,20 @@ class ColorPallete {
       root.style.setProperty(vars, pallete[vars]);
     }
   }
+
+  /**
+   * Set new collor pallete for application
+   * @param {String} theme - "dark" | "light"
+   * @returns {darkPalleteVars|lightPalleteVars} 
+   */
+  getPallete(pallete) {
+    const palletes = {
+      light: ColorPallete.lightPalleteVars,
+      dark: ColorPallete.darkPalleteVars,
+    };
+
+    return palletes[pallete]
+  }
 }
 
 export default new ColorPallete();
