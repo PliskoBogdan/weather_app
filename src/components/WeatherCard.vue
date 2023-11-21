@@ -38,8 +38,7 @@
           {{ currentDayWeather.description }}
         </div>
       </div>
-
-      <TemperatureChart :data="chartData" cssClasses="weather-chart" />
+      <TemperatureChart :chart-data="chartData" />
     </div>
 
     <template v-else>
@@ -87,7 +86,7 @@ export default {
           )
       );
 
-      const curr = this.model?.list?.[keyCurrentInList] || []
+      const curr = this.model?.list?.[keyCurrentInList] || [];
 
       const labels =
         curr?.map((item) => this.$options.filters.formatTime(item.dt_txt)) ||
