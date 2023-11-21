@@ -5,7 +5,7 @@
  */
 export default function weatherByDaysMapper(list) {
   const weatherByDay = {};
-  let currentTimeInfo = null;
+  let currentTimeStampInfo = null;
 
   for (let i = 0; i < list.length; i++) {
     const curr = list[i];
@@ -16,7 +16,7 @@ export default function weatherByDaysMapper(list) {
     const date = dateText.match(pattern)[1];
 
     if (i === 0) {
-      currentTimeInfo = curr
+      currentTimeStampInfo = curr
     }
 
     if (!weatherByDay[date]) {
@@ -26,5 +26,5 @@ export default function weatherByDaysMapper(list) {
     weatherByDay[date].push(curr);
   }
 
-  return { list: weatherByDay, currentTimeInfo };
+  return { list: weatherByDay, currentTimeStampInfo };
 }

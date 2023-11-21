@@ -29,6 +29,6 @@ describe('weatherByDaysMapper', () => {
 
     const output = weatherByDaysMapper(input);
 
-    expect(output.currentTimeInfo).toEqual({ dt_txt: '2023-11-21 12:00:00' });
+    expect(output.currentTimeStampInfo).toEqual({ dt_txt: '2023-11-21 12:00:00' });
   });
 });

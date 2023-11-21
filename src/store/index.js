@@ -16,7 +16,7 @@ export default new Vuex.Store({
       country: null,
       city: null,
       list: {},
-      currentTimeInfo: {},
+      currentTimeStampInfo: {},
       latitude: 0,
       longitude: 0
     },
@@ -42,11 +42,11 @@ export default new Vuex.Store({
     },
 
     SET_WEATHER(state, payload) {
-      const { currentTimeInfo, list } = weatherByDaysMapper(payload.list)
+      const { currentTimeStampInfo, list } = weatherByDaysMapper(payload.list)
       state.model.country = payload.city.country;
       state.model.city = payload.city.name;
       state.model.list = list;
-      state.model.currentTimeInfo = currentTimeInfo,
+      state.model.currentTimeStampInfo = currentTimeStampInfo,
       state.model.latitude = payload.latitude
       state.model.longitude = payload.longitude
     },
