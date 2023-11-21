@@ -3,7 +3,11 @@
   "week": "Неделя",
   "Feels like": "Чувствуется как",
   "Add to favorite": "Добавить в избранное",
+  "Delete from Favorite": "Удалить из избранного",
   "Yes": "Да",
   "Cancel": "Отмена",
-  "Search city": "Найти город"
+  "Search city": "Найти город",
+  "Temperature": "Температура",
+  "Wind speed": "Скорость ветра",
+  "ms": "м/с"
 }

@@ -2928,6 +2928,11 @@ char-regex@^2.0.0:
   resolved "https://registry.yarnpkg.com/char-regex/-/char-regex-2.0.1.tgz#6dafdb25f9d3349914079f010ba8d0e6ff9cd01e"
   integrity sha512-oSvEeo6ZUD7NepqAat3RqoucZ5SeqLJgOvVIwkafu6IP3V0pO38s/ypdVUmDDK6qIIHNlYHJAKX9E7R7HoKElw==
 
+chart.js@3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/chart.js/-/chart.js-3.8.0.tgz#c6c14c457b9dc3ce7f1514a59e9b262afd6f1a94"
+  integrity sha512-cr8xhrXjLIXVLOBZPkBZVF6NDeiVIrPLHcMhnON7UufudL+CNeRrD+wpYanswlm8NpudMdrt3CHoLMQMxJhHRg==
+
 chokidar@^3.5.3:
   version "3.5.3"
   resolved "https://registry.yarnpkg.com/chokidar/-/chokidar-3.5.3.tgz#1cf37c8707b932bd1af1ae22c0432e2acd1903bd"
@@ -7989,6 +7994,11 @@ vue-awesome@^4.5.0:
   version "4.5.0"
   resolved "https://registry.yarnpkg.com/vue-awesome/-/vue-awesome-4.5.0.tgz#d42179335de20b53fee9bdb090498aeee1074f78"
   integrity sha512-pbtZkRecXLm3fg0eVkwObDRM9YNU1BW5wDsL4mMoSvUXZbTnS+N2E4CahAwKJL5OPbqmhJQgZPekQoJrID7dcQ==
+
+vue-chartjs@4.0.0:
+  version "4.0.0"
+  resolved "https://registry.yarnpkg.com/vue-chartjs/-/vue-chartjs-4.0.0.tgz#91fbf5154c4b0a8a95d145288b914c38257caa1e"
+  integrity sha512-fNBUNWvbhwMjuaOq1t36oV+78l2t60S4OAvIK3gXbBPtlk9QPs0xPj8qQZQgJYtX0lJ/iC6fIK+A11QTcnFa3Q==
 
 vue-cli-plugin-i18n@~2.3.2:
   version "2.3.2"

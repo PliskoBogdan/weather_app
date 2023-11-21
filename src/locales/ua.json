@@ -3,5 +3,11 @@
   "week": "Тиждень",
   "Feels like": "Відчувається як",
   "Add to favorite": "Додати в обране",
-  "Search city": "Знайти мiсто"
+  "Delete from Favorite": "Видилити з обраного",
+  "Search city": "Знайти мiсто",
+  "Yes": "Так",
+  "Cancel": "Вiдмiна",
+  "Temperature": "Температура",
+  "Wind speed": "Швидкiсть вiтру",
+  "ms": "м/с"
 }

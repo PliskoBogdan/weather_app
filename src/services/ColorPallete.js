@@ -4,12 +4,12 @@ class ColorPallete {
     "--sidebar-bg-color": "#42639f",
     "--sidebar-item-hover": "#5381af",
     "--sidebar-item-active": "#9a9a9ad6",
-    "--text-main": "#ffffff",
-    "--main-soul": "#2058bf",
+    "--text-main": "#9baacc",
+    "--main-soul": "#1d325a",
     "--header-bar": "#d8d8d8",
     "--hover": "#9d9d9d",
     "--main-background": "#fff",
-    "--bg-button": "#b9b7b7",
+    "--bg-button": "#396496",
     "--bg-menu": "#8d8d8d",
   };
 
@@ -18,12 +18,12 @@ class ColorPallete {
     "--sidebar-bg-color": "#333333",
     "--sidebar-item-hover": "#f1f1f1",
     "--sidebar-item-active": "#494949e0",
-    "--text-main": "#ffffff",
+    "--text-main": "#c9c9c9",
     "--main-soul": "#333333",
     "--header-bar": "#d8d8d8",
     "--hover": "#9d9d9d",
     "--main-background": "#363636",
-    "--bg-button": "#b9b7b7",
+    "--bg-button": "#4d4d4d",
     "--bg-menu": "#8d8d8d",
   };
 

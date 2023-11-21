@@ -17,20 +17,24 @@
       </div>
     </div>
     <div v-if="singleDayTabActive" class="weather__card-single">
-      <div>{{ model.city }}, {{ model.country }}</div>
-      <div>
-        <img
-          :src="`http://openweathermap.org/img/wn/${currentDayWeather.icon}@2x.png`"
-          width="50px"
-          height="50px"
-          alt="weather_icon"
-        />
-        <span> {{ Math.round(currentDayWeather.temp) }} °C </span>
+      <div class="weather__card-single-content">
+        <div class="text-main">{{ model.city }}, {{ model.country }}</div>
+        <div class="weather__card-single-content-icon">
+          <img
+            :src="`http://openweathermap.org/img/wn/${currentDayWeather.icon}@2x.png`"
+            width="50px"
+            height="50px"
+            alt="weather_icon"
+          />
+          <span class="text-main"> {{ Math.round(currentDayWeather.temp) }} °C </span>
+        </div>
+        <div class="text-main">
+          {{ $t("Feels like") }} {{ currentDayWeather.feelsLike }}°,
+          {{ currentDayWeather.description }}
+        </div>
       </div>
-      <div>
-        {{ $t("Feels like") }} {{ currentDayWeather.feelsLike }},
-        {{ currentDayWeather.description }}
-      </div>
+
+      <TemperatureChart :data="chartData" cssClasses="weather-chart" />
     </div>
 
     <template v-else>
@@ -52,10 +56,12 @@ import { mapGetters } from "vuex";
 import getMidDayItemIndex from "@/utils/getMidDayItemIndex";
 
 import TruncatedWeatherCard from "@/components/TruncatedWeatherCard.vue";
+import TemperatureChart from "@/components/TemperatureChart.vue";
 
 export default {
   components: {
     TruncatedWeatherCard,
+    TemperatureChart,
   },
 
   data() {
@@ -66,6 +72,36 @@ export default {
 
   computed: {
     ...mapGetters(["model", "activeTabIndex"]),
+
+    chartData() {
+      const curr = this.model.list["2023-11-22"];
+
+      const labels =
+        curr?.map((item) => this.$options.filters.formatTime(item.dt_txt)) ||
+        [];
+      const data = curr?.map((item) => Math.round(item.main.temp)) || [];
+      const secData = curr?.map((item) => item.wind.speed) || [];
+
+      return {
+        labels,
+        datasets: [
+          {
+            label: this.$t("Temperature"),
+            backgroundColor: "#796316",
+            borderColor: "#79736a",
+            data,
+            yAxisID: "y",
+          },
+          {
+            label: this.$t("Wind speed"),
+            backgroundColor: "blue",
+            borderColor: '#494949e0',
+            data: secData,
+            yAxisID: "y1",
+          },
+        ],
+      };
+    },
 
     currentDayWeather() {
       const currentTimeStampInfo = this.model.currentTimeStampInfo;
@@ -90,7 +126,7 @@ export default {
 
   methods: {
     select(currentDayList) {
-      const midDayItem = getMidDayItemIndex(currentDayList)
+      const midDayItem = getMidDayItemIndex(currentDayList);
       const data = currentDayList[midDayItem];
       this.$store.commit("SET_CURRENT_TIME_STAMP_INFO", data);
       this.$store.commit("SET_ACTIVE_TAB", 0);
@@ -143,7 +179,7 @@ export default {
   background: var(--hover);
 }
 .weather__card-tab-active {
-  background: var(--accent-primary);
+  background: #2d508b;
 }
 .weather__card-tab:last-child {
   border-right: 1px solid var(--main-soul);
@@ -153,6 +189,23 @@ export default {
   display: flex;
   justify-content: center;
   flex-direction: column;
+}
+
+.weather__card-single-content {
+  background-color: var(--main-soul);
+  border: 1px solid var(--accent-primary);
+  text-align: center;
+}
+
+/* Chart */
+.weather-chart {
+  background-color: var(--main-soul);
+}
+
+.weather__card-single-content-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 @media screen and (max-width: 500px) {

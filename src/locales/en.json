@@ -3,7 +3,11 @@
   "week": "Week",
   "Feels like": "Feels like",
   "Add to favorite": "Add to favorite",
+  "Delete from Favorite": "Delete from Favorite",
   "Yes": "Yes",
   "Cancel": "Cancel",
-  "Search city": "Search city"
+  "Search city": "Search city",
+  "Temperature": "Temperature",
+  "Wind speed": "Wind speed",
+  "ms": "m/s"
 }

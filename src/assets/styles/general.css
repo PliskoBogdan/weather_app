@@ -18,6 +18,9 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
+.text-main {
+  color: var(--text-main)
+}
 .justify-center {
   justify-content: center !important;
 }
