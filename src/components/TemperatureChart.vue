@@ -41,7 +41,9 @@ export default {
     LineChartGenerator,
   },
   props: {
-    chartData: Array,
+    chartData: { 
+      required: true
+    },
     chartId: {
       type: String,
       default: "line-chart",

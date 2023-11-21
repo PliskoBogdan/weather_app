@@ -49,7 +49,7 @@ ul {
 li {
   padding: 8px;
   cursor: pointer;
-  color: var(--text-main);
+  color: #565656;
   transition: background-color 0.3s;
 }
 
