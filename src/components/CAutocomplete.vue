@@ -5,6 +5,7 @@
       @input="debouncedInput"
       @focus="handleFocus"
       @blur="handleBlur"
+      :placeholder="$t('Search city')"
     />
     <ul v-if="showSuggestions" class="suggestions">
       <li

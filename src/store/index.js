@@ -11,7 +11,7 @@ Vue.use(Vuex);
 export default new Vuex.Store({
   state: {
     currentPallete: null,
-
+    loadingsList: [],
     model: {
       country: null,
       city: null,
@@ -23,9 +23,19 @@ export default new Vuex.Store({
 
   getters: {
     currentPallete: (state) => state.currentPallete,
-    model: (state) => state.model
+    model: (state) => state.model,
+    loadingsList: (state) => state.loadingsList
   },
   mutations: {
+    ADD_LOADING_PROCESS(state, id) {
+      state.loadingsList.push({ id })
+    },
+
+    CANCEL_LOADING_PROCESS(state, payload) {
+      const index = state.loadingsList.findIndex((id) => id === payload);
+      state.loadingsList.splice(index, 1)
+    },
+
     SET_CURRENT_APP_PALLETE(state, payload) {
       state.currentPallete = payload;
     },

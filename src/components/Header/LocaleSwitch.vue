@@ -17,6 +17,8 @@
 </template>
 
 <script>
+import { mapActions, mapGetters, mapMutations } from "vuex";
+
 import { locales } from "@/vars";
 
 import CMenu from "@/components/CMenu";
@@ -32,9 +34,20 @@ export default {
     };
   },
 
+  computed: {
+    ...mapGetters(['model'])
+  },
+
   methods: {
-    changeLocale(locale) {
+    ...mapActions(['getUserLocationWeather']),
+    ...mapMutations(["ADD_LOADING_PROCESS", "CANCEL_LOADING_PROCESS"]),
+
+    async changeLocale(locale) {
+      const processId = `${Math.random()}`
+      this.$store.commit('ADD_LOADING_PROCESS', processId)
       this.$i18n.changeLocale(locale);
+      await this.getUserLocationWeather(this.model)
+      this.$store.commit('CANCEL_LOADING_PROCESS', processId)
     },
   },
 };

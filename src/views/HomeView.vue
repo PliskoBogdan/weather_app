@@ -60,7 +60,6 @@ export default {
     ...mapActions(['getUserLocationWeather']),
     
     async onSearch(value) {
-      // this.list = [{ id: 1, name: 'Kharkiv' }, { id: 2, name: "USA" }];
       const data = await findLocationByQuery(value);
       this.list = data.map((e) => {
         const stateByLocale = e?.local_names?.[this.$i18n.locale]

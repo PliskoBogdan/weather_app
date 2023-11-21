@@ -32,12 +32,12 @@ Vue.directive('preloader', {
     if (!preloader) {
       return;
     }
-
     if (binding.value) {
-      preloader.__vue__.loading = binding.value;
+      preloader.classList.remove('d-none')
     } else {
-      el.removeChild(preloader.__vue__.$el);
+      preloader.classList.add('d-none')
     }
+
   },
 });
 

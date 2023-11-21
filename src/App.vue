@@ -4,7 +4,7 @@
     <Header />
     <SidebarMenu />
     <!-- 16 left and right sidebar padding sum -->
-    <div v-preloader="isLoading" class="main__wrapper">
+    <div v-preloader="isShowPreloader" class="main__wrapper">
       <div class="container">
         <router-view />
       </div>
@@ -17,7 +17,7 @@
 </style>
 
 <script>
-import { mapActions, mapGetters } from "vuex";
+import { mapActions, mapGetters, mapMutations } from "vuex";
 
 import ColorPallete from "@/services/ColorPallete";
 
@@ -39,7 +39,9 @@ export default {
   async created() {
     const lang = this.$i18n.locale;
 
-    this.isLoading = true;
+    const processId = `${Math.random()}`;
+    this.ADD_LOADING_PROCESS(processId)
+
     try {
       this.getCurrentAppPallete();
       ColorPallete.setTheme(this.currentPallete);
@@ -63,16 +65,21 @@ export default {
       };
       await this.getUserLocationWeather(defaultPosition);
     } finally {
-      this.isLoading = false;
+      this.CANCEL_LOADING_PROCESS(processId)
     }
   },
 
   computed: {
-    ...mapGetters(["currentPallete"]),
+    ...mapGetters(["currentPallete", "loadingsList"]),
+
+    isShowPreloader() {
+      return this.loadingsList.length > 0;
+    },
   },
 
   methods: {
     ...mapActions(["getCurrentAppPallete", "getUserLocationWeather"]),
+    ...mapMutations(["ADD_LOADING_PROCESS", "CANCEL_LOADING_PROCESS"])
   },
 };
 </script>
