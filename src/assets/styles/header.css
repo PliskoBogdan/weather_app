@@ -39,3 +39,9 @@ header {
 .header-lang__switch-activator, .header-lang__switch-lang {
   text-transform: uppercase;
 }
+
+@media screen and (max-width: 1000px) {
+  header {
+    height: 100px;
+  }
+}

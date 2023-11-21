@@ -220,9 +220,22 @@ export default {
   align-items: center;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 550px) {
   .weather__card {
     margin-top: 2.4em;
+  }
+  .weather__card-header {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .weather__card-tab {
+    border-radius: 10px !important;
+  }
+
+  .weather__card-single {
+    padding-top: 65px;
+    background-color: var(--main-soul)
   }
 }
 .weather__card-dark .weather__card-tab-active {

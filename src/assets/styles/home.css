@@ -10,12 +10,23 @@
   align-items: center;
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .home-header {
     flex-direction: column;
   }
 
   .home-add__favorite {
     margin-top: 0.5em;
+  }
+  .CAutocomplete {
+    margin-top: 12px !important;
+    width: 100%;
+  }
+  .CAutocomplete input {
+    width: 100%;
+  }
+  .home-add__favorite {
+    width: 100%;
+    margin-right: 0 !important;
   }
 }

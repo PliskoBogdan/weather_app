@@ -133,7 +133,7 @@ export default {
         stage.resize();
       } else if (window.innerWidth <= 650) {
         stage.canvas.parentNode.style.height = `${window.innerHeight - 100}px`;
-        stage.canvas.parentNode.style.width = `${window.innerWidth - 80}px`;
+        stage.canvas.parentNode.style.width = `${window.innerWidth - 120}px`;
         stage.resize();
       } else {
         stage.resize()

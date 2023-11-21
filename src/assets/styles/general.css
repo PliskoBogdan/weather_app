@@ -39,3 +39,21 @@ body {
 .mr-1 {
   margin-right: 0.5em;
 }
+
+@media screen and (max-width: 1200px) {
+  body {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  body {
+    font-size: 1.4em;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  body {
+    font-size: 1.9em;
+  }
+}

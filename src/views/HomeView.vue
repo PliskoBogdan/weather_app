@@ -1,19 +1,18 @@
 <template>
   <div class="home">
     <div class="home-header" :class="{ 'justify-center': !isActiveFirstTab }">
-      <div class="home-add__favorite">
+      <div class="home-add__favorite mr-1">
         <CButton @click="addToFavorite">{{
           isInFavorite ? $t("Delete from Favorite") : $t("Add to favorite")
         }}</CButton>
       </div>
-      <div v-if="isActiveFirstTab">
-        <CAutocomplete
-          :list="list"
-          @search="onSearch"
-          @input="getNewWeather"
-          itemValue="title"
-        />
-      </div>
+      <CAutocomplete
+        v-if="isActiveFirstTab"
+        :list="list"
+        @search="onSearch"
+        @input="getNewWeather"
+        itemValue="title"
+      />
     </div>
     <WeatherCard class="mt-2" />
   </div>

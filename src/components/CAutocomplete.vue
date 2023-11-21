@@ -43,8 +43,8 @@ export default {
 
   watch: {
     list(value) {
-      this.filteredSuggestions = value
-    }
+      this.filteredSuggestions = value;
+    },
   },
 
   methods: {
@@ -84,6 +84,7 @@ export default {
   border: none;
   border-radius: 0.2em;
   color: var(--text-main);
+  padding: 5px 10px;
 }
 .CAutocomplete input::placeholder {
   color: var(--text-main);
@@ -121,5 +122,24 @@ export default {
 }
 .suggestions li:hover:first-child {
   border-radius: 5px 5px 0px 0px;
+}
+
+@media screen and (max-width: 1200px) {
+  .CAutocomplete input {
+    font-size: 1.3em;
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .CAutocomplete input {
+    font-size: 0.9em;
+  }
+}
+
+
+@media screen and (max-width: 550px) {
+  .CAutocomplete input {
+    font-size: 1em;
+  }
 }
 </style>

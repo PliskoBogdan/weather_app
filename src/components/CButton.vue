@@ -4,7 +4,6 @@
 
 <style scoped>
 .CButton {
-  display: inline-block;
   padding: 5px 10px;
   font-size: 0.9em;
   color: var(--text-main);

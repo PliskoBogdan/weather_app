@@ -57,6 +57,7 @@ export default {
   width: 32px;
   height: 18px;
   border-radius: 9999px;
+  font-size: 14px;
 }
 
 .toggle-wrapper:focus {
