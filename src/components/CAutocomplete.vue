@@ -83,7 +83,10 @@ export default {
   background-color: var(--bg-button);
   border: none;
   border-radius: 0.2em;
-  color: #3c3c3c;
+  color: var(--text-main);
+}
+.CAutocomplete input::placeholder {
+  color: var(--text-main);
 }
 .CAutocomplete input:focus {
   outline: none;

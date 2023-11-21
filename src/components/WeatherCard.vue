@@ -1,5 +1,8 @@
 <template>
-  <div class="weather__card">
+  <div
+    class="weather__card"
+    :class="{ 'weather__card-dark': currentPallete === 'dark' }"
+  >
     <div class="weather__card-header">
       <div
         class="weather__card-tab"
@@ -26,7 +29,9 @@
             height="50px"
             alt="weather_icon"
           />
-          <span class="text-main"> {{ Math.round(currentDayWeather.temp) }} °C </span>
+          <span class="text-main">
+            {{ Math.round(currentDayWeather.temp) }} °C
+          </span>
         </div>
         <div class="text-main">
           {{ $t("Feels like") }} {{ currentDayWeather.feelsLike }}°,
@@ -71,10 +76,18 @@ export default {
   },
 
   computed: {
-    ...mapGetters(["model", "activeTabIndex"]),
+    ...mapGetters(["model", "activeTabIndex", "currentPallete"]),
 
     chartData() {
-      const curr = this.model.list["2023-11-22"];
+      const keyCurrentInList = Object.keys(this.model?.list).find(
+        (key) =>
+          this.$options.filters.formattedDate(key) ===
+          this.$options.filters.formattedDate(
+            this.model.currentTimeStampInfo.dt_txt
+          )
+      );
+
+      const curr = this.model?.list?.[keyCurrentInList] || []
 
       const labels =
         curr?.map((item) => this.$options.filters.formatTime(item.dt_txt)) ||
@@ -95,7 +108,7 @@ export default {
           {
             label: this.$t("Wind speed"),
             backgroundColor: "blue",
-            borderColor: '#494949e0',
+            borderColor: "#494949e0",
             data: secData,
             yAxisID: "y1",
           },
@@ -212,5 +225,8 @@ export default {
   .weather__card {
     margin-top: 2.4em;
   }
+}
+.weather__card-dark .weather__card-tab-active {
+  background-color: #737477;
 }
 </style>

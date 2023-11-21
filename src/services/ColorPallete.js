@@ -1,13 +1,13 @@
 class ColorPallete {
   static lightPalleteVars = {
     "--accent-primary": "#919499",
-    "--sidebar-bg-color": "#42639f",
+    "--sidebar-bg-color": "#1d325a",
     "--sidebar-item-hover": "#5381af",
     "--sidebar-item-active": "#9a9a9ad6",
-    "--text-main": "#9baacc",
+    "--text-main": "#c1c1c1",
     "--main-soul": "#1d325a",
     "--header-bar": "#d8d8d8",
-    "--hover": "#9d9d9d",
+    "--hover": "#284c84c9",
     "--main-background": "#fff",
     "--bg-button": "#396496",
     "--bg-menu": "#8d8d8d",
