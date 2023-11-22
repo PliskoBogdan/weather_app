@@ -2,7 +2,7 @@
   <div v-if="isOpen" class="confirm-modal">
     <div class="modal-content">
       <p>{{ message }}</p>
-      <CButton @click="confirmAction(true)" class="mr-1">{{ $t("Yes") }}</CButton>
+      <CButton @click="confirmAction(true)">{{ $t("Yes") }}</CButton>
       <CButton @click="confirmAction(false)">{{ $t("Cancel") }}</CButton>
     </div>
   </div>
@@ -61,5 +61,8 @@ export default {
 
 button {
   margin: 0 10px;
+}
+.CButton:last-child {
+  margin-top: 0.3em;
 }
 </style>

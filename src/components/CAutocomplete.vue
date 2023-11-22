@@ -85,6 +85,8 @@ export default {
   border-radius: 0.2em;
   color: var(--text-main);
   padding: 5px 10px;
+  box-sizing: border-box;
+  width: 100%;
 }
 .CAutocomplete input::placeholder {
   color: var(--text-main);
