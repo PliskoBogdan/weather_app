@@ -87,17 +87,17 @@ export default {
   transition: opacity 0.2s;
 }
 .left-drawer-width {
-  width: 10vw;
+  width: 25vw;
 }
 @media screen and (max-width: 1000px) {
   .left-drawer-width {
-    width: 25vw !important;
+    width: 35vw !important;
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 600px) {
   .left-drawer-width {
-    width: 35vw !important;
+    width: 45vw !important;
   }
 }
 </style>
