@@ -1,4 +1,5 @@
-# test-task
+# General Emotions and description
+As I believe, the time for tz is not enough with what requirements were requested, as well as a huge number of questions on the test task itself, which HR did not answer me in the end we have what we have. The 5th point for me is not clear, beautiful styles and layout because of the time has gone to the second plan, you will see my representation of the program, under the description of the TT it fits
 
 ## Project setup
 ```
