@@ -104,9 +104,10 @@ export default {
             position: "right",
             ticks: {
               callback: function (value) {
-                return `${Math.round(value)} ${i18n.t("ms")}`;
+                return `${value} ${i18n.t("ms")}`
               },
             },
+            beginAtZero: true,
             grid: {
               drawOnChartArea: false,
             },
