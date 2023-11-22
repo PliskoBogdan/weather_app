@@ -11,6 +11,7 @@ body {
   display: flex;
   justify-content: center;
   background-color: var(--main-background);
+  height: 100vh;
 }
 .container {
   width: 1200px;
@@ -18,8 +19,8 @@ body {
   padding: 20px;
   box-sizing: border-box;
 }
-.favorit_container {
-  height: 100vh;
+.favorit_wrapper {
+  height: 100vh !important;
 }
 .text-main {
   color: var(--text-main)
@@ -36,6 +37,9 @@ body {
 .mt-2 {
   margin-top: 2em;
 }
+.mb-1 {
+  margin-bottom: 1em;
+}
 .mt-1 {
   margin-top: 1em;
 }
@@ -47,24 +51,30 @@ body {
   body {
     font-size: 1.3em;
   }
+
+  .main__wrapper {
+    height: 105vh;
+  }
 }
 
 @media screen and (max-width: 1000px) {
   body {
     font-size: 1.4em;
   }
-
-  .favorit_container {
-    height: 100%;
-  }
-  .favorit_container .weather__card {
-    padding-top: 1.6em;
-    background-color: var(--main-soul) !important;
-  }
 }
 
 @media screen and (max-width: 600px) {
   body {
     font-size: 1.9em;
+  }
+
+  .main__wrapper {
+    height: 110vh;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .main__wrapper {
+    height: 115vh;
   }
 }

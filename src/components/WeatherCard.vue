@@ -38,7 +38,7 @@
           {{ currentDayWeather.description }}
         </div>
       </div>
-      <TemperatureChart :chart-data="chartData" />
+      <TemperatureChart :chart-data="chartData" :height="maxChartHeight" />
     </div>
 
     <template v-else>
@@ -76,6 +76,17 @@ export default {
 
   computed: {
     ...mapGetters(["model", "activeTabIndex", "currentPallete"]),
+
+    maxChartHeight() {
+      if (window.innerHeight < 800) {
+        return 200
+      }
+      if (window.innerHeight < 1000) {
+        return 300
+      } 
+
+      return 350
+    },
 
     chartData() {
       const keyCurrentInList = Object.keys(this.model?.list).find(
@@ -222,7 +233,7 @@ export default {
 
 @media screen and (max-width: 550px) {
   .weather__card {
-    margin-top: 2.4em;
+    margin-top: 2.2em;
   }
   .weather__card-header {
     flex-direction: column;
@@ -240,6 +251,14 @@ export default {
 
   .truncated__cards {
     margin-top: 30px;
+  }
+
+  .weather__card-single-content {
+    border: none;
+  }
+
+  .weather-chart {
+    margin-top: 0.3em;
   }
 }
 .weather__card-dark .weather__card-tab-active {

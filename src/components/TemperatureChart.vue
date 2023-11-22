@@ -41,8 +41,8 @@ export default {
     LineChartGenerator,
   },
   props: {
-    chartData: { 
-      required: true
+    chartData: {
+      required: true,
     },
     chartId: {
       type: String,
@@ -127,17 +127,19 @@ export default {
   methods: {
     handleResize() {
       const stage = this.$refs.chart.getCurrentChart();
-      if (window.innerWidth < 1200 && window.innerWidth > 650) {
-        stage.canvas.parentNode.style.height = `${window.innerHeight - 100}px`;
-        stage.canvas.parentNode.style.width = `${window.innerWidth - 100}px`;
-        stage.resize();
-      } else if (window.innerWidth <= 650) {
-        stage.canvas.parentNode.style.height = `${window.innerHeight - 100}px`;
-        stage.canvas.parentNode.style.width = `${window.innerWidth - 120}px`;
-        stage.resize();
-      } else {
-        stage.resize()
+      if (window.innerWidth <= 800) {
+        stage.canvas.parentNode.style.height = `${
+          (window.innerWidth / 4) * 2
+        }px`;
       }
+
+      if (window.innerWidth < 1200 && window.innerWidth > 650) {
+        stage.canvas.parentNode.style.width = `${window.innerWidth - 100}px`;
+      } else if (window.innerWidth <= 650) {
+        stage.canvas.parentNode.style.width = `${window.innerWidth - 120}px`;
+      }
+
+      stage.resize();
     },
   },
 };

@@ -17,10 +17,11 @@
 
   .home-add__favorite {
     margin-top: 0.5em;
+    margin-bottom: 0.5em;
   }
   .CAutocomplete {
-    margin-top: 12px !important;
     width: 100%;
+    margin-bottom: 0.5em;
   }
   .CAutocomplete input {
     width: 100%;
