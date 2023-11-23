@@ -5,8 +5,12 @@
       <LocaleSwitch />
       <div class="header-color__pallete">
         <s-icon name="sun" scale="1" class="sun__image" />
-        <CSwitch :value="isDarkPallete" @input="onChangePallete" style="display: flex;" />
-        <s-icon name="moon" scale="1" class="moon__image"/>
+        <CSwitch
+          :value="isDarkPallete"
+          @input="onChangePallete"
+          style="display: flex"
+        />
+        <s-icon name="moon" scale="1" class="moon__image" />
       </div>
     </div>
   </header>
@@ -18,14 +22,14 @@ import { mapGetters, mapActions } from "vuex";
 import { EventBus } from "@/main";
 
 import CSwitch from "@/components/CSwitch.vue";
-import LocaleSwitch from './LocaleSwitch.vue'
+import LocaleSwitch from "./LocaleSwitch.vue";
 
-import ColorPallete from '@/services/ColorPallete'
+import ColorPallete from "@/services/ColorPallete";
 
 export default {
   components: {
     CSwitch,
-    LocaleSwitch
+    LocaleSwitch,
   },
 
   data() {
@@ -35,30 +39,39 @@ export default {
   },
 
   created() {
-    this.isDarkPallete = this.currentPallete === 'dark'
+    this.setDefaultPallete();
   },
 
   computed: {
-    ...mapGetters(['currentPallete'])
+    ...mapGetters(["currentPallete"]),
   },
 
   methods: {
-    ...mapActions(['setCurrentPalleteInStorage']),
+    ...mapActions(["setCurrentPalleteInStorage"]),
+
+    setDefaultPallete() {
+      if (window?.matchMedia("(prefers-color-scheme: dark)")?.matches) {
+        this.onChangePallete(true);
+        this.isDarkPallete = true;
+      } else {
+        this.isDarkPallete = this.currentPallete === "dark";
+      }
+    },
 
     changeLocale(locale) {
-      this.$i18n.changeLocale(locale)
+      this.$i18n.changeLocale(locale);
     },
 
     onChangePallete(value) {
       this.isDarkPallete = value;
 
-      const theme = value ? 'dark' : 'light';
+      const theme = value ? "dark" : "light";
       this.setCurrentPalleteInStorage(theme);
       this.setPallete(theme);
     },
 
     setPallete(theme) {
-      ColorPallete.setTheme(theme)
+      ColorPallete.setTheme(theme);
     },
 
     openSidebar() {
@@ -69,5 +82,5 @@ export default {
 </script>
 
 <style scoped>
-@import '@/assets/styles/header.css';
+@import "@/assets/styles/header.css";
 </style>
