@@ -12,8 +12,8 @@ localVue.use(VueRouter);
 const router = new VueRouter();
 
 describe("SidebarLink", () => {
-  // Test Case 1: It renders the component with the provided props
-  it("renders the component with the correct props", () => {
+  // It renders the component with the provided props
+  it("should renders the component with the correct props", () => {
     const to = "/example";
     const icon = "example-icon";
 
@@ -27,8 +27,8 @@ describe("SidebarLink", () => {
     expect(wrapper.props().icon).toBe(icon);
   });
 
-  // Test Case 2: It correctly computes the isActive property
-  it("computes the isActive property correctly", () => {
+  // It correctly computes the isActive property
+  it("should computes the isActive property correctly", () => {
     const to = "/example";
     const icon = "example-icon";
 
@@ -49,8 +49,8 @@ describe("SidebarLink", () => {
     expect(wrapper.vm.isActive).toBe(true);
   });
 
-  // Test Case 3: It responds to route changes by updating the isActive class
-  it("updates the isActive class on route changes", async () => {
+  // It responds to route changes by updating the isActive class
+  it("should updates the isActive class on route changes", async () => {
     const to = "/my-route";
     const icon = "example-icon";
 
@@ -61,13 +61,8 @@ describe("SidebarLink", () => {
     });
     expect(wrapper.classes("active")).toBe(false);
 
-    // Change the route path to match 'to' prop
     await router.push(to);
-    
-    // Wait for the next tick to allow the DOM to update
     await wrapper.vm.$nextTick();
-    
-    // Now, the isActive class should be present
     expect(wrapper.classes("active")).toBe(true);
   });
 });
