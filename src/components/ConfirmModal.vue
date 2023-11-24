@@ -1,7 +1,7 @@
 <template>
   <div v-if="isOpen" class="confirm-modal">
     <div class="modal-content">
-      <p>{{ message }}</p>
+      <p class="modal-text">{{ message }}</p>
       <CButton @click="confirmAction(true)">{{ $t("Yes") }}</CButton>
       <CButton @click="confirmAction(false)">{{ $t("Cancel") }}</CButton>
     </div>
