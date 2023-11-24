@@ -13,8 +13,8 @@
           alt="weather_icon"
         />
       </div>
-      <div class="mr-1">
-        <span> {{ Math.round(maxTemp) }} / {{ Math.round(minTemp) }}</span>
+      <div class="temp__area mr-1">
+        <span> {{ Math.round(minTemp) }} / {{ Math.round(maxTemp) }}</span>
       </div>
       <div class="text-center">
         <span>{{ description }}</span>
@@ -41,7 +41,7 @@ export default {
     },
 
     minTemp() {
-      return Math.round(this.item?.[getMidDayItemIndex(this.item)]?.main?.temp_max || 0);
+      return Math.round(this.item?.[getMidDayItemIndex(this.item)]?.main?.temp_min || 0);
     },
 
     midTemp() {
