@@ -23,6 +23,7 @@ module.exports = {
         '**/__tests__/*.{j,t}s?(x)',
         '**/tests/unit/**/*.spec.{j,t}s?(x)',
         "**/*.spec.js",
+        "**/*.test.js",
       ],
       env: {
         jest: true
