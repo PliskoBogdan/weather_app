@@ -136,17 +136,24 @@ export default {
     handleResize() {
       requestAnimationFrame(() => {
         const stage = this.$refs.chart.getCurrentChart();
+        if (!stage) {
+          return
+        }
         const root = document.documentElement;
         const rootStyles = getComputedStyle(root);
-        const mainContainerWidth = +rootStyles.getPropertyValue('--main-container-width')?.match(/\d+/)?.[0] || 1200;
+        const mainContainerWidth =
+          +rootStyles
+            .getPropertyValue("--main-container-width")
+            ?.match(/\d+/)?.[0] || 1200;
+
+        const homeContainer = document.querySelector(".home");
+        const containerStyles = window.getComputedStyle(homeContainer);
+        const paddingL = parseInt(containerStyles.paddingLeft, 10);
+        const paddingR = parseInt(containerStyles.paddingRight, 10);
 
         if (window.innerWidth > mainContainerWidth) {
-          const container = document.querySelector(".home");
-          const containerStyles = window.getComputedStyle(container);
-          const paddingL = parseInt(containerStyles.paddingLeft, 10);
-          const paddingR = parseInt(containerStyles.paddingRight, 10);
           stage.canvas.parentNode.style.width = `${
-            container.offsetWidth - (paddingL + paddingR)
+            homeContainer.offsetWidth - (paddingL + paddingR) - 5
           }px`;
           stage.resize();
           return;
@@ -158,15 +165,9 @@ export default {
         const maxHeight = Math.max(container.offsetHeight, chart.offsetHeight);
         container.style.height = maxHeight;
 
-        if (window.innerWidth > 600) {
-          stage.canvas.parentNode.style.width = `${
-            container.offsetWidth - 95
-          }px`;
-        } else {
-          stage.canvas.parentNode.style.width = `${
-            container.offsetWidth - 110
-          }px`;
-        }
+        stage.canvas.parentNode.style.width = `${
+          container.offsetWidth - (paddingL + paddingR) - 5
+        }px`;
 
         stage.resize();
       });

@@ -21,7 +21,6 @@ body {
 .container {
   width: var(--main-container-width);
   background-color: var(--main-background);
-  padding: 20px;
   box-sizing: border-box;
 }
 .favorit_wrapper {
