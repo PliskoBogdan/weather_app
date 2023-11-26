@@ -25,6 +25,8 @@ import { findLocationByQuery } from "@/api/index";
 
 import FavoriteListService from "@/services/FavoriteListService";
 
+import generateId from "@/utils/generateId";
+
 import CButton from "@/components/CButton.vue";
 import WeatherCard from "@/components/WeatherCard.vue";
 import CAutocomplete from "@/components/CAutocomplete";
@@ -54,7 +56,7 @@ export default {
   watch: {
     model: {
       handler(val) {
-        this.isInFavorite = FavoriteListService.findInList(val.latitude, val.longitude) !== -1;
+        this.isInFavorite = FavoriteListService.isItemInList(val.id);
       },
       immediate: true,
       deep: true,
@@ -73,7 +75,7 @@ export default {
 
         return {
           title: `${e.country}, ${stateByLocale} ${e.state || e.name}`,
-          id: e.lat,
+          id: generateId(),
           lat: e.lat,
           lon: e.lon,
         };
@@ -86,56 +88,28 @@ export default {
       await this.getUserLocationWeather(payload);
     },
 
-    findIndexCurrentLocationInFavorite() {
-      try {
-        const favorite = JSON.parse(localStorage.getItem("favorite"));
-        // TO-DO move this var
-        const indexFavorite = favorite.findIndex(
-          ({ latitude, longitude }) =>
-            latitude === this.model.latitude &&
-            longitude === this.model.longitude
-        );
-        return indexFavorite;
-      } catch (error) {
-        return -1;
-      }
-    },
-
     async addToFavorite() {
-      const favoriteList = FavoriteListService.getList();
-
       if (this.isInFavorite) {
         const result = await this.$confirm(this.$t("Are you sure?"));
         if (!result) {
           return;
         }
       }
-      const { latitude, longitude } = this.model;
 
-      try {
-        if (favoriteList.length > 1) {
-          await this.$confirm(this.$t("favorite list full"), true)
-          return;
-        }
+      const processId = generateId();
+      this.$store.commit("ADD_LOADING_PROCESS", processId);
+      const favoriteList = FavoriteListService.getList();
 
-        const indexCurrentLocationInFavorit = FavoriteListService.findInList(latitude, longitude);
-
-        if (indexCurrentLocationInFavorit !== -1) {
-          favoriteList.splice(indexCurrentLocationInFavorit, 1);
-          this.isInFavorite = false;
-        } else {
-          favoriteList.push({
-            latitude,
-            longitude,
-            title: `${this.model.country}, ${this.model.city}`,
-          });
-          this.isInFavorite = true;
-        }
-
-        localStorage.setItem("favorite", JSON.stringify(favoriteList));
-      } catch (error) {
-        console.error("Error when add to favorite--", error);
+      // if favorite list is full
+      if (favoriteList.length === 5) {
+        await this.$confirm(this.$t("favorite list full"), true);
+        return;
       }
+
+      const { isInFavorite } = await FavoriteListService.setFavorite(this.model);
+      this.isInFavorite = isInFavorite;
+
+      this.$store.commit("CANCEL_LOADING_PROCESS", processId);
     },
   },
 };

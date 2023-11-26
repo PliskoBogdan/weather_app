@@ -21,6 +21,8 @@ import { mapActions, mapGetters, mapMutations } from "vuex";
 
 import ColorPallete from "@/services/ColorPallete";
 
+import generateId from "@/utils/generateId";
+
 import SidebarMenu from "@/components/SidebarMenu.vue";
 import Header from "@/components/Header/Header.vue";
 
@@ -39,7 +41,7 @@ export default {
   async created() {
     const lang = this.$i18n.locale;
 
-    const processId = `${Math.random()}`;
+    const processId = generateId();
     this.ADD_LOADING_PROCESS(processId)
 
     try {

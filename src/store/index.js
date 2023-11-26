@@ -14,12 +14,13 @@ export default new Vuex.Store({
     loadingsList: [],
     activeTabIndex: 0,
     model: {
+      id: "",
       country: null,
       city: null,
       list: {},
       currentTimeStampInfo: {},
       latitude: 0,
-      longitude: 0
+      longitude: 0,
     },
   },
 
@@ -59,6 +60,7 @@ export default new Vuex.Store({
       state.model.currentTimeStampInfo = currentTimeStampInfo,
       state.model.latitude = payload.latitude
       state.model.longitude = payload.longitude
+      state.model.id = payload.city.id
     },
   },
   actions: {

@@ -19,6 +19,8 @@
 <script>
 import { mapGetters, mapMutations } from "vuex";
 
+import generateId from "@/utils/generateId";
+
 import { locales } from "@/vars";
 
 import CMenu from "@/components/CMenu";
@@ -42,7 +44,7 @@ export default {
     ...mapMutations(["ADD_LOADING_PROCESS", "CANCEL_LOADING_PROCESS"]),
 
     async changeLocale(locale) {
-      const processId = `${Math.random()}`;
+      const processId = generateId();
       this.$store.commit("ADD_LOADING_PROCESS", processId);
       this.$i18n.changeLocale(locale);
       await this.$store.dispatch('getUserLocationWeather', this.model);
