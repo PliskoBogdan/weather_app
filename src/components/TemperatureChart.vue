@@ -26,6 +26,8 @@ import {
 } from "chart.js";
 
 import i18n from "@/i18n";
+
+import debounce from "@/utils/debounce";
 ChartJS.register(
   Title,
   Tooltip,
@@ -75,6 +77,7 @@ export default {
   },
   data() {
     return {
+      debouncedResize: null,
       chartWidth: 900,
       chartHeight: 300,
       chartOptions: {
@@ -104,7 +107,7 @@ export default {
             position: "right",
             ticks: {
               callback: function (value) {
-                return `${value} ${i18n.t("ms")}`
+                return `${value} ${i18n.t("ms")}`;
               },
             },
             beginAtZero: true,
@@ -118,35 +121,39 @@ export default {
   },
 
   mounted() {
-    window.addEventListener("resize", this.handleResize);
+    this.debouncedResize = debounce(this.handleResize, 200);
+
+    window.addEventListener("resize", this.debouncedResize);
+
+    this.handleResize();
   },
 
   beforeDestroy() {
-    window.removeEventListener("resize", this.handleResize);
+    window.removeEventListener("resize", this.debouncedResize);
   },
 
   methods: {
     handleResize() {
-      const container = document.querySelector('.main__wrapper');
-      const chart = document.querySelector('.weather-chart');
+      requestAnimationFrame(() => {
+        const container = document.querySelector(".main__wrapper");
+        const chart = document.querySelector(".weather-chart");
 
-      const maxHeight = Math.max(container.offsetHeight, chart.offsetHeight);
-      container.style.height = maxHeight;
-      
-      const stage = this.$refs.chart.getCurrentChart();
-      if (window.innerWidth <= 800) {
-        stage.canvas.parentNode.style.height = `${
-          (window.innerWidth / 4) * 2
-        }px`;
-      }
+        const maxHeight = Math.max(container.offsetHeight, chart.offsetHeight);
+        container.style.height = maxHeight;
 
-      if (window.innerWidth < 1200 && window.innerWidth > 650) {
-        stage.canvas.parentNode.style.width = `${window.innerWidth - 100}px`;
-      } else if (window.innerWidth <= 650) {
-        stage.canvas.parentNode.style.width = `${window.innerWidth - 120}px`;
-      }
+        const stage = this.$refs.chart.getCurrentChart();
+        if (window.innerWidth > 600) {
+          stage.canvas.parentNode.style.width = `${
+            container.offsetWidth - 95
+          }px`;
+        } else {
+          stage.canvas.parentNode.style.width = `${
+            container.offsetWidth - 110
+          }px`;
+        }
 
-      stage.resize();
+        stage.resize();
+      });
     },
   },
 };
