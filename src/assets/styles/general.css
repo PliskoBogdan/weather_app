@@ -1,6 +1,11 @@
+:root {
+  --main-container-width: 1200px
+}
+
 body {
   margin: 0;
   height: 100%;
+  font-size: 1.3em;
 }
 .pointer {
   cursor: pointer;
@@ -14,7 +19,7 @@ body {
   min-height: 100vh;
 }
 .container {
-  width: 1200px;
+  width: var(--main-container-width);
   background-color: var(--main-background);
   padding: 20px;
   box-sizing: border-box;
@@ -45,12 +50,6 @@ body {
 }
 .mr-1 {
   margin-right: 0.5em;
-}
-
-@media screen and (max-width: 1200px) {
-  body {
-    font-size: 1.3em;
-  }
 }
 
 @media screen and (max-width: 1000px) {

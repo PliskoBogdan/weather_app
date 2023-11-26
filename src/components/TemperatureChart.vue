@@ -135,13 +135,29 @@ export default {
   methods: {
     handleResize() {
       requestAnimationFrame(() => {
+        const stage = this.$refs.chart.getCurrentChart();
+        const root = document.documentElement;
+        const rootStyles = getComputedStyle(root);
+        const mainContainerWidth = +rootStyles.getPropertyValue('--main-container-width')?.match(/\d+/)?.[0] || 1200;
+
+        if (window.innerWidth > mainContainerWidth) {
+          const container = document.querySelector(".home");
+          const containerStyles = window.getComputedStyle(container);
+          const paddingL = parseInt(containerStyles.paddingLeft, 10);
+          const paddingR = parseInt(containerStyles.paddingRight, 10);
+          stage.canvas.parentNode.style.width = `${
+            container.offsetWidth - (paddingL + paddingR)
+          }px`;
+          stage.resize();
+          return;
+        }
+
         const container = document.querySelector(".main__wrapper");
         const chart = document.querySelector(".weather-chart");
 
         const maxHeight = Math.max(container.offsetHeight, chart.offsetHeight);
         container.style.height = maxHeight;
 
-        const stage = this.$refs.chart.getCurrentChart();
         if (window.innerWidth > 600) {
           stage.canvas.parentNode.style.width = `${
             container.offsetWidth - 95

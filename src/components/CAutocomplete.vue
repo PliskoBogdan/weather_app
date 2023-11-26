@@ -87,6 +87,7 @@ export default {
   padding: 5px 10px;
   box-sizing: border-box;
   width: 100%;
+  font-size: 1.3em;
 }
 .CAutocomplete input::placeholder {
   color: var(--text-main);
@@ -124,12 +125,6 @@ export default {
 }
 .suggestions li:hover:first-child {
   border-radius: 5px 5px 0px 0px;
-}
-
-@media screen and (max-width: 1200px) {
-  .CAutocomplete input {
-    font-size: 1.3em;
-  }
 }
 
 @media screen and (max-width: 1000px) {

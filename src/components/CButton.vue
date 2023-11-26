@@ -5,7 +5,7 @@
 <style scoped>
 .CButton {
   padding: 5px 10px;
-  font-size: 0.9em;
+  font-size: 1.3em;
   color: var(--text-main);
   background-color: var(--bg-button);
   border: none;
@@ -16,12 +16,6 @@
 }
 .CButton:hover {
   background-color: var(--hover);
-}
-
-@media screen and (max-width: 1200px) {
-  .CButton {
-    font-size: 1.3em;
-  }
 }
 
 @media screen and (max-width: 1000px) {
