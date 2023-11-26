@@ -19,6 +19,8 @@
 <script>
 import { mapActions, mapGetters } from "vuex";
 
+import FavoriteListService from "@/services/FavoriteListService";
+
 export default {
   data() {
     return {
@@ -27,7 +29,7 @@ export default {
   },
 
   created() {
-    this.getFavorite();
+    this.favorite = FavoriteListService.getList();
   },
 
   computed: {
@@ -36,15 +38,6 @@ export default {
 
   methods: {
     ...mapActions(["getUserLocationWeather"]),
-
-    getFavorite() {
-      try {
-        const favorite = JSON.parse(localStorage.getItem("favorite")) || [];
-        this.favorite = favorite;
-      } catch (error) {
-        console.error("Error when try get favorite collection");
-      }
-    },
 
     removeBlock(index) {
       this.favorite.splice(index, 1);

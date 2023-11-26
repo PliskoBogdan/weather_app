@@ -2,8 +2,8 @@
   <div v-if="isOpen" class="confirm-modal">
     <div class="modal-content">
       <p class="modal-text">{{ message }}</p>
-      <CButton @click="confirmAction(true)">{{ $t("Yes") }}</CButton>
-      <CButton @click="confirmAction(false)">{{ $t("Cancel") }}</CButton>
+      <CButton v-if="!isAlertModal" @click="confirmAction(true)">{{ $t("Yes") }}</CButton>
+      <CButton @click="confirmAction(false)">{{ isAlertModal ? $t("Ok") : $t("Cancel") }}</CButton>
     </div>
   </div>
 </template>
@@ -15,6 +15,7 @@ export default {
   data() {
     return {
       isOpen: false,
+      isAlertModal: false,
       message: "",
     };
   },
@@ -53,6 +54,7 @@ export default {
   padding: 20px;
   border-radius: 8px;
   text-align: center;
+  max-width: 50vh;
 }
 
 .modal-content p {

@@ -23,6 +23,8 @@ import { mapGetters, mapActions } from "vuex";
 
 import { findLocationByQuery } from "@/api/index";
 
+import FavoriteListService from "@/services/FavoriteListService";
+
 import CButton from "@/components/CButton.vue";
 import WeatherCard from "@/components/WeatherCard.vue";
 import CAutocomplete from "@/components/CAutocomplete";
@@ -51,8 +53,8 @@ export default {
 
   watch: {
     model: {
-      handler() {
-        this.isInFavorite = this.findIndexCurrentLocationInFavorite() !== -1;
+      handler(val) {
+        this.isInFavorite = FavoriteListService.findInList(val.latitude, val.longitude) !== -1;
       },
       immediate: true,
       deep: true,
@@ -100,8 +102,10 @@ export default {
     },
 
     async addToFavorite() {
+      const favoriteList = FavoriteListService.getList();
+
       if (this.isInFavorite) {
-        const result = await this.$confirm("Вы уверены?");
+        const result = await this.$confirm(this.$t("Are you sure?"));
         if (!result) {
           return;
         }
@@ -109,20 +113,18 @@ export default {
       const { latitude, longitude } = this.model;
 
       try {
-        const favorite = JSON.parse(localStorage.getItem("favorite")) || [];
-
-        if (favorite.length === 5) {
+        if (favoriteList.length > 1) {
+          await this.$confirm(this.$t("favorite list full"), true)
           return;
         }
 
-        const indexCurrentLocationInFavorit =
-          this.findIndexCurrentLocationInFavorite();
+        const indexCurrentLocationInFavorit = FavoriteListService.findInList(latitude, longitude);
 
         if (indexCurrentLocationInFavorit !== -1) {
-          favorite.splice(indexCurrentLocationInFavorit, 1);
+          favoriteList.splice(indexCurrentLocationInFavorit, 1);
           this.isInFavorite = false;
         } else {
-          favorite.push({
+          favoriteList.push({
             latitude,
             longitude,
             title: `${this.model.country}, ${this.model.city}`,
@@ -130,7 +132,7 @@ export default {
           this.isInFavorite = true;
         }
 
-        localStorage.setItem("favorite", JSON.stringify(favorite));
+        localStorage.setItem("favorite", JSON.stringify(favoriteList));
       } catch (error) {
         console.error("Error when add to favorite--", error);
       }

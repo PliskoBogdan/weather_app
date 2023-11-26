@@ -9,5 +9,8 @@
   "Search city": "Search city",
   "Temperature": "Temperature",
   "Wind speed": "Wind speed",
-  "ms": "m/s"
+  "ms": "m/s",
+  "Are you sure?": "Are you sure?",
+  "favorite list full": "You are trying to exceed the maximum allowed value in the list, the maximum is 5. Remove something from the list to add a new location.",
+  "Ok": "Ok"
 }
