@@ -7,7 +7,8 @@ Vue.use(VueRouter)
 
 const routes = [
   { path: '/', component: HomeView },
-  { path: '/favorite', component: Favorite }
+  { path: '/favorite', component: Favorite },
+  { path: '*', redirect: '/' }
 ];
 
 const router = new VueRouter({
