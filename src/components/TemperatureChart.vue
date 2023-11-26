@@ -127,6 +127,12 @@ export default {
 
   methods: {
     handleResize() {
+      const container = document.querySelector('.main__wrapper');
+      const chart = document.querySelector('.weather-chart');
+
+      const maxHeight = Math.max(container.offsetHeight, chart.offsetHeight);
+      container.style.height = maxHeight;
+      
       const stage = this.$refs.chart.getCurrentChart();
       if (window.innerWidth <= 800) {
         stage.canvas.parentNode.style.height = `${

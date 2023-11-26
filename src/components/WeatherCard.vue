@@ -38,7 +38,7 @@
           {{ currentDayWeather.description }}
         </div>
       </div>
-      <TemperatureChart :chart-data="chartData" :height="maxChartHeight" />
+      <TemperatureChart :chart-data="chartData" />
     </div>
 
     <template v-else>
