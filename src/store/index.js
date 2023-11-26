@@ -2,9 +2,13 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 import axios from "@/api/axios";
-import i18n from "@/i18n"
+import i18n from "@/i18n";
+
+import { findLocationByCoords } from "@/api/index";
 
 import weatherByDaysMapper from "@/mappers/weatherByDays-mapper";
+import modelMapper from "@/mappers/model-mapper";
+import FavoriteListService from "@/services/FavoriteListService";
 
 Vue.use(Vuex);
 
@@ -13,6 +17,7 @@ export default new Vuex.Store({
     currentPallete: null,
     loadingsList: [],
     activeTabIndex: 0,
+    models: [],
     model: {
       id: "",
       country: null,
@@ -27,21 +32,22 @@ export default new Vuex.Store({
   getters: {
     currentPallete: (state) => state.currentPallete,
     model: (state) => state.model,
+    models: (state) => state.models,
     loadingsList: (state) => state.loadingsList,
-    activeTabIndex: (state) => state.activeTabIndex
+    activeTabIndex: (state) => state.activeTabIndex,
   },
   mutations: {
     SET_ACTIVE_TAB(state, index) {
-      state.activeTabIndex = index
+      state.activeTabIndex = index;
     },
 
     ADD_LOADING_PROCESS(state, id) {
-      state.loadingsList.push({ id })
+      state.loadingsList.push({ id });
     },
 
     CANCEL_LOADING_PROCESS(state, payload) {
       const index = state.loadingsList.findIndex((id) => id === payload);
-      state.loadingsList.splice(index, 1)
+      state.loadingsList.splice(index, 1);
     },
 
     SET_CURRENT_APP_PALLETE(state, payload) {
@@ -53,17 +59,54 @@ export default new Vuex.Store({
     },
 
     SET_WEATHER(state, payload) {
-      const { currentTimeStampInfo, list } = weatherByDaysMapper(payload.list)
+      const { currentTimeStampInfo, list } = weatherByDaysMapper(payload.list);
       state.model.country = payload.city.country;
       state.model.city = payload.city.name;
       state.model.list = list;
-      state.model.currentTimeStampInfo = currentTimeStampInfo,
-      state.model.latitude = payload.latitude
-      state.model.longitude = payload.longitude
-      state.model.id = payload.city.id
+      state.model.currentTimeStampInfo = currentTimeStampInfo;
+      state.model.latitude = payload.latitude;
+      state.model.longitude = payload.longitude;
+      state.model.id = payload.city.id;
+    },
+
+    SET_MODELS(state, payload) {
+      payload.forEach((item) => {
+        state.models.push(modelMapper(item));
+      });
+    },
+
+    SET_CURRENT_TIME_STAMP_INFO_FOR_MODEL(state, payload) {
+      const indexNeededModel = state.models.findIndex(
+        ({ id }) => id === payload.modelId
+      );
+      const neededModelCopy = JSON.parse(
+        JSON.stringify(state.models[indexNeededModel])
+      );
+      neededModelCopy.currentTimeStampInfo = payload;
+      state.models.splice(indexNeededModel, 1, neededModelCopy);
     },
   },
   actions: {
+    async getModels({ commit }) {
+      const list = FavoriteListService.getList();
+
+      const getLocationPromises = list.map(({ latitude, longitude }) =>
+        findLocationByCoords({ latitude, longitude })
+      );
+
+      try {
+        const result = await Promise.all(getLocationPromises);
+        commit("SET_MODELS", result);
+      } catch (error) {
+        console.error("Error get data for favorites", error);
+      }
+    },
+
+    async getNewWeatherForModel({commit}, payload) {
+      const indexModelToUpdate = payload.id;
+      
+    },
+
     async getUserLocationWeather({ commit }, { latitude, longitude }) {
       const { data } = await axios.get(
         `data/2.5/forecast?lat=${latitude}&lon=${longitude}&appid=${process.env.VUE_APP_OPEN_WEATHER_API_KEY}&lang=${i18n.locale}&units=metric`

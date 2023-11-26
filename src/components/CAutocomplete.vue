@@ -2,10 +2,11 @@
   <div class="CAutocomplete">
     <input
       :value="inputValue"
+      :placeholder="$t('Search city')"
+      :disabled="disabled"
       @input="debouncedInput"
       @focus="handleFocus"
       @blur="handleBlur"
-      :placeholder="$t('Search city')"
     />
     <ul v-if="showSuggestions" class="suggestions">
       <li
@@ -27,6 +28,7 @@ export default {
     list: { type: Array, required: true },
     listKey: { type: String, required: false, default: "id" },
     itemValue: { type: String, required: false, default: "id" },
+    disabled: { type: Boolean, required: false, default: false }
   },
 
   data() {
@@ -88,6 +90,14 @@ export default {
   box-sizing: border-box;
   width: 100%;
   font-size: 1.3em;
+}
+
+
+
+.CAutocomplete input:disabled {
+  color: #808080;
+  border: 1px solid #dcdcdc;
+  cursor: not-allowed;
 }
 .CAutocomplete input::placeholder {
   color: var(--text-main);

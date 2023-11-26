@@ -68,14 +68,13 @@ export default {
     TemperatureChart,
   },
 
-  data() {
-    return {
-      activeTab: 0,
-    };
+  props: {
+    activeTabIndex: { type: Number, required: true },
+    model: { type: Object, required: true }
   },
 
   computed: {
-    ...mapGetters(["model", "activeTabIndex", "currentPallete"]),
+    ...mapGetters(["currentPallete"]),
 
     maxChartHeight() {
       if (window.innerHeight < 800) {
@@ -151,12 +150,14 @@ export default {
     select(currentDayList) {
       const midDayItem = getMidDayItemIndex(currentDayList);
       const data = currentDayList[midDayItem];
-      this.$store.commit("SET_CURRENT_TIME_STAMP_INFO", data);
-      this.$store.commit("SET_ACTIVE_TAB", 0);
+      this.$store.commit("SET_CURRENT_TIME_STAMP_INFO_FOR_MODEL", { ...data, modelId: this.model.id });
+      this.$emit("change-tab", 0)
+      // this.$store.commit("SET_ACTIVE_TAB", 0);
     },
 
     onChangeTab(value) {
-      this.$store.commit("SET_ACTIVE_TAB", value);
+      this.$emit("change-tab", value)
+      // this.$store.commit("SET_ACTIVE_TAB", value);
     },
   },
 };
