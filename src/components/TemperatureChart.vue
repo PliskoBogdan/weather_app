@@ -121,7 +121,7 @@ export default {
   },
 
   mounted() {
-    this.debouncedResize = debounce(this.handleResize, 200);
+    this.debouncedResize = debounce(this.handleResize, 150);
 
     window.addEventListener("resize", this.debouncedResize);
 
